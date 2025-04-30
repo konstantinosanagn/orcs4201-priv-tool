@@ -1,0 +1,57 @@
+/* report-layout.css */
+
+/* Layout Tweaks */
+.center-box { display: none !important; }
+.fullscreen-bg {
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  padding: 3rem;
+}
+
+/* Spacer Rows */
+.spacer-row       { height: 80px; }
+.spacer-second-row { height: 50px; padding-bottom: 6rem; }
+
+/* Column Backgrounds */
+.pink-col,
+.red-col { background-color: transparent; }
+.red-col .row { align-items: flex-start; }
+
+/* Equalize-Grid: make two columns stretch to the same height */
+.equalize-grid {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Each side (pink/red) becomes a column-flex container */
+.equalize-grid > .pink-col,
+.equalize-grid > .red-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* On the red side, let its inner container-fluid fill available height */
+.equalize-grid .red-col .container-fluid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Split that container into two equal rows */
+.equalize-grid .red-col .container-fluid > .row {
+  flex: 1;
+  display: flex;
+}
+
+/* Make each ranking‐cell fill its row’s height */
+.equalize-grid .red-col .ranking-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Have each ranking‐block itself stretch to fill its parent */
+.equalize-grid .ranking-cell .ranking-block {
+  flex: 1 1 0;
+  height: 100%;
+}

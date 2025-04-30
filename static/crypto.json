@@ -1,0 +1,160 @@
+[
+    {
+      "category": "Cryptography Tool Selection",
+      "goal": "Identify the best cryptographic approach based on security requirements, performance, and trust model.",
+      "insights": [
+        "Symmetric encryption offers high-performance confidentiality but relies on secure key distribution.",
+        "Asymmetric encryption simplifies key management at the cost of higher computational overhead.",
+        "Digital signature schemes guarantee integrity and non-repudiation, essential for authentication and legal compliance.",
+        "The ideal choice depends on message size, latency constraints, key distribution infrastructure, and trust assumptions."
+      ],
+      "questions": [
+        {
+          "question": "Which security property is most critical?",
+          "answers": [
+            {
+              "text": "Confidentiality of large datasets",
+              "weights": {
+                "SymmetricEncryption": 8,
+                "AsymmetricEncryption": 5,
+                "DigitalSignature": 1
+              }
+            },
+            {
+              "text": "Message integrity and authentication",
+              "weights": {
+                "SymmetricEncryption": 4,
+                "AsymmetricEncryption": 6,
+                "DigitalSignature": 8
+              }
+            },
+            {
+              "text": "Non-repudiation and legal compliance",
+              "weights": {
+                "SymmetricEncryption": 1,
+                "AsymmetricEncryption": 3,
+                "DigitalSignature": 9
+              }
+            }
+          ]
+        },
+        {
+          "question": "What is your key distribution model?",
+          "answers": [
+            {
+              "text": "Pre-shared secret keys between participants",
+              "weights": {
+                "SymmetricEncryption": 9,
+                "AsymmetricEncryption": 2,
+                "DigitalSignature": 1
+              }
+            },
+            {
+              "text": "Public-Key Infrastructure (PKI) available",
+              "weights": {
+                "SymmetricEncryption": 2,
+                "AsymmetricEncryption": 9,
+                "DigitalSignature": 8
+              }
+            },
+            {
+              "text": "Manual exchange of public keys without PKI",
+              "weights": {
+                "SymmetricEncryption": 3,
+                "AsymmetricEncryption": 7,
+                "DigitalSignature": 7
+              }
+            }
+          ]
+        },
+        {
+          "question": "What are your performance and resource constraints?",
+          "answers": [
+            {
+              "text": "High throughput, low latency required",
+              "weights": {
+                "SymmetricEncryption": 9,
+                "AsymmetricEncryption": 3,
+                "DigitalSignature": 4
+              }
+            },
+            {
+              "text": "CPU-constrained or embedded environment",
+              "weights": {
+                "SymmetricEncryption": 8,
+                "AsymmetricEncryption": 4,
+                "DigitalSignature": 3
+              }
+            },
+            {
+              "text": "Infrequent operations where speed is less critical",
+              "weights": {
+                "SymmetricEncryption": 2,
+                "AsymmetricEncryption": 8,
+                "DigitalSignature": 7
+              }
+            }
+          ]
+        },
+        {
+          "question": "What is the typical size of the data or messages?",
+          "answers": [
+            {
+              "text": "Large bulk data transfers",
+              "weights": {
+                "SymmetricEncryption": 9,
+                "AsymmetricEncryption": 2,
+                "DigitalSignature": 1
+              }
+            },
+            {
+              "text": "Small packets or key exchanges",
+              "weights": {
+                "SymmetricEncryption": 3,
+                "AsymmetricEncryption": 8,
+                "DigitalSignature": 5
+              }
+            },
+            {
+              "text": "Frequent signing of small messages",
+              "weights": {
+                "SymmetricEncryption": 1,
+                "AsymmetricEncryption": 4,
+                "DigitalSignature": 9
+              }
+            }
+          ]
+        },
+        {
+          "question": "What trust model governs your key management?",
+          "answers": [
+            {
+              "text": "Single trusted authority manages all keys",
+              "weights": {
+                "SymmetricEncryption": 7,
+                "AsymmetricEncryption": 8,
+                "DigitalSignature": 5
+              }
+            },
+            {
+              "text": "No single trusted party; distributed trust",
+              "weights": {
+                "SymmetricEncryption": 2,
+                "AsymmetricEncryption": 5,
+                "DigitalSignature": 8
+              }
+            },
+            {
+              "text": "Public verifiability for third parties",
+              "weights": {
+                "SymmetricEncryption": 1,
+                "AsymmetricEncryption": 3,
+                "DigitalSignature": 9
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  

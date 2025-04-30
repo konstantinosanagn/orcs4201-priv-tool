@@ -1,0 +1,22 @@
+<!-- templates/communicate_questions.html -->
+{% extends 'layout.html' %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/communicate.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/communicate_questions.css') }}">
+{% endblock %}
+
+{% block placeholder %}
+<div
+   id="questions-container"
+   data-category="Communicate"
+   data-intro-url="{{ url_for('communicate') }}"
+   data-complete-url="{{ url_for('protect') }}"
+></div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/communicate_questions.js') }}" defer></script>
+{% endblock %}

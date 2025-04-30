@@ -1,0 +1,22 @@
+<!-- templates/protect_questions.html -->
+{% extends 'layout.html' %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/protect.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/protect_questions.css') }}">
+{% endblock %}
+
+{% block placeholder %}
+<div
+   id="questions-container"
+   data-category="Protect"
+   data-intro-url="{{ url_for('protect') }}"
+   data-complete-url="{{ url_for('report') }}"
+></div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/protect_questions.js') }}" defer></script>
+{% endblock %}

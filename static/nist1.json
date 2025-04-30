@@ -1,0 +1,822 @@
+[
+  {
+    "category": "Identify",
+    "goal": "Understand what data you have, at what level of granularity, and the re-identification risks.",
+    "insights": [
+      "Make a complete list of every system, dataset, and user that handles personal data.",
+      "Draw simple maps showing exactly where each piece of data travels and who touches it.",
+      "Link each data element back to its purpose so you never lose track of why it exists.",
+      "Highlight any operations that could let someone re-identify an individual."
+    ],
+    "questions": [
+      {
+        "question": "What level of data granularity are you working with?",
+        "explanation": "Granularity means how detailed your data is. Individual-level records include each customer’s purchase history or patient test results. Aggregate-only statistics refer to summaries like average age of users or total sales per month.",
+        "answers": [
+          {
+            "text": "Individual-level records",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 0,
+              "Cryptography": 8,
+              "Federated Learning": 7,
+              "Synthetic Data": 3
+            }
+          },
+          {
+            "text": "Aggregate-only statistics",
+            "weights": {
+              "Anonymization": 5,
+              "Differential Privacy": 8,
+              "Cryptography": 1,
+              "Federated Learning": 2,
+              "Synthetic Data": 7
+            }
+          }
+        ]
+      },
+      {
+        "question": "Do you need to retain identifiers (PII) to re-link records later?",
+        "explanation": "Personally Identifiable Information (PII) includes names, emails, phone numbers, or IDs that can directly or indirectly identify someone. Keeping PII allows linking results back to individuals later, while removing or hashing them removes this ability.",
+        "answers": [
+          {
+            "text": "Yes, re-linking required",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 2,
+              "Cryptography": 8,
+              "Federated Learning": 6,
+              "Synthetic Data": 2
+            }
+          },
+          {
+            "text": "No, can fully remove or hash them",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 6,
+              "Cryptography": 1,
+              "Federated Learning": 2,
+              "Synthetic Data": 8
+            }
+          }
+        ]
+      },
+      {
+        "question": "How high is your re-identification risk from quasi-identifiers?",
+        "explanation": "Quasi-identifiers are fields like ZIP code, birth date, or gender that don’t directly identify someone but can when combined. In the AOL search log release, users were re-identified using combinations of such fields. Always assume risk is higher if your dataset could be combined with outside knowledge.",
+        "answers": [
+          {
+            "text": "High",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 8,
+              "Cryptography": 3,
+              "Federated Learning": 4,
+              "Synthetic Data": 6
+            }
+          },
+          {
+            "text": "Medium",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 5,
+              "Cryptography": 4,
+              "Federated Learning": 3,
+              "Synthetic Data": 5
+            }
+          },
+          {
+            "text": "Low",
+            "weights": {
+              "Anonymization": 8,
+              "Differential Privacy": 2,
+              "Cryptography": 1,
+              "Federated Learning": 1,
+              "Synthetic Data": 2
+            }
+          }
+        ]
+      },
+      {
+        "question": "Must you track exactly which source record produced each analytic result?",
+        "explanation": "An audit trail means being able to trace each output back to its original data point. This is often required for legal or financial audits.",
+        "answers": [
+          {
+            "text": "Yes – full audit trail is required",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 1,
+              "Cryptography": 8,
+              "Federated Learning": 6,
+              "Synthetic Data": 2
+            }
+          },
+          {
+            "text": "No – acceptable to lose individual link",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 6,
+              "Cryptography": 1,
+              "Federated Learning": 2,
+              "Synthetic Data": 7
+            }
+          }
+        ]
+      },
+      {
+        "question": "Will you ever join this data with another dataset (CRM, logs, third-party feeds)?",
+        "explanation": "Joining datasets can create unexpected privacy risks. In the Netflix Prize incident, anonymized movie ratings were cross-referenced with IMDb data to re-identify users. Even if your data looks safe alone, combining it with other datasets can reveal hidden identities.",
+        "answers": [
+          {
+            "text": "Yes – cross-dataset joins planned",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 2,
+              "Cryptography": 6,
+              "Federated Learning": 6,
+              "Synthetic Data": 3
+            }
+          },
+          {
+            "text": "No – single dataset use only",
+            "weights": {
+              "Anonymization": 6,
+              "Differential Privacy": 5,
+              "Cryptography": 1,
+              "Federated Learning": 2,
+              "Synthetic Data": 7
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Govern",
+    "goal": "Set your privacy rules (laws, policies, values), your organizational risk appetite, and the roles & oversight needed to enforce them.",
+    "insights": [
+      "Write down your privacy values, policies, and any legal must-haves so everyone knows the rules.",
+      "Decide how much privacy risk you’re willing to accept and share that clear limit organization-wide.",
+      "Assign specific owners and approvers for each control to avoid confusion over who’s responsible.",
+      "Review and update your governance regularly as business needs and laws change."
+    ],
+    "questions": [
+      {
+        "question": "Which privacy regulations apply to your organization?",
+        "explanation": "Privacy regulations set the rules for how you collect, store, share, or delete personal data. They affect which privacy technologies are legally acceptable or even required. These laws vary by country and sector — for example, healthcare organizations in the U.S. follow HIPAA, schools may follow FERPA, and companies that collect data from Europeans must comply with GDPR. If you're handling sensitive data and aren't sure which regulations apply, check with your legal or compliance team. You may need to comply with multiple regulations at once.",
+        "answers": [
+          {
+            "text": "GDPR - European regulation requiring strong user consent, data minimization, and breach notification.",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 5,
+              "Cryptography": 7,
+              "Federated Learning": 2,
+              "Synthetic Data": 4
+            }
+          },
+          {
+            "text": "HIPAA - U.S. healthcare law requiring encryption, access control, and confidentiality for PHI.",
+            "weights": {
+              "Anonymization": 3,
+              "Differential Privacy": 2,
+              "Cryptography": 9,
+              "Federated Learning": 1,
+              "Synthetic Data": 2
+            }
+          },
+          {
+            "text": "CCPA - California law emphasizing user rights like opt-out from data sale and access to data.",
+            "weights": {
+              "Anonymization": 5,
+              "Differential Privacy": 3,
+              "Cryptography": 6,
+              "Federated Learning": 2,
+              "Synthetic Data": 4
+            }
+          },
+          {
+            "text": "FERPA - U.S. education law that protects student records and requires parental consent before sharing.",
+            "weights": {
+              "Anonymization": 5,
+              "Differential Privacy": 4,
+              "Cryptography": 6,
+              "Federated Learning": 2,
+              "Synthetic Data": 5
+            }
+          },
+          {
+            "text": "GLBA - U.S. financial regulation requiring data-sharing disclosures and security controls.",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 3,
+              "Cryptography": 8,
+              "Federated Learning": 1,
+              "Synthetic Data": 3
+            }
+          },
+          {
+            "text": "None/Other - No formal regulation, but following best practices still helps reduce risk.",
+            "weights": {
+              "Anonymization": 3,
+              "Differential Privacy": 3,
+              "Cryptography": 3,
+              "Federated Learning": 3,
+              "Synthetic Data": 3
+            }
+          }
+        ]
+      },
+      {
+        "question": "Does any regulation or internal policy mandate a specific technique?",
+        "explanation": "Some organizations are required to use specific techniques due to legal obligations or internal audit frameworks. Knowing if you're constrained helps eliminate options that would otherwise be considered.",
+        "answers": [
+          {
+            "text": "Encryption is explicitly required - e.g., HIPAA or PCI-DSS mandates encryption for secure data transmission and storage.",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 1,
+              "Cryptography": 9,
+              "Federated Learning": 2,
+              "Synthetic Data": 1
+            }
+          },
+          {
+            "text": "Differential Privacy is required - e.g., the U.S. Census mandates DP for publishing statistical data.",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 9,
+              "Cryptography": 2,
+              "Federated Learning": 2,
+              "Synthetic Data": 3
+            }
+          },
+          {
+            "text": "Anonymization/pseudonymization only - commonly required under GDPR or ISO27001.",
+            "weights": {
+              "Anonymization": 9,
+              "Differential Privacy": 2,
+              "Cryptography": 1,
+              "Federated Learning": 1,
+              "Synthetic Data": 5
+            }
+          },
+          {
+            "text": "No specific mandate - you're free to choose the most suitable method based on internal judgment.",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 4,
+              "Cryptography": 4,
+              "Federated Learning": 4,
+              "Synthetic Data": 4
+            }
+          }
+        ]
+      },
+      {
+        "question": "Who signs off on new privacy controls?",
+        "explanation": "Different stakeholders bring different priorities. Legal and policy teams emphasize compliance and auditability. IT and security teams prioritize operational risk and enforcement.",
+        "answers": [
+          {
+            "text": "Legal / Policy - decisions driven by regulatory compliance and public accountability.",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 6,
+              "Cryptography": 2,
+              "Federated Learning": 2,
+              "Synthetic Data": 5
+            }
+          },
+          {
+            "text": "Security / IT - decisions driven by technical feasibility, efficiency, and risk mitigation.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 2,
+              "Cryptography": 6,
+              "Federated Learning": 5,
+              "Synthetic Data": 2
+            }
+          }
+        ]
+      },
+      {
+        "question": "How often must your privacy controls be reviewed or audited?",
+        "explanation": "Review frequency affects your system's adaptability and compliance posture. Automated reviews align with dynamic systems, while manual audits suit slower-changing environments.",
+        "answers": [
+          {
+            "text": "Continuous / Automated - real-time tracking of access, noise budgets, or encryption activity.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 7,
+              "Cryptography": 7,
+              "Federated Learning": 4,
+              "Synthetic Data": 3
+            }
+          },
+          {
+            "text": "Annual / Manual - yearly assessments, often conducted by third-party auditors.",
+            "weights": {
+              "Anonymization": 6,
+              "Differential Privacy": 3,
+              "Cryptography": 5,
+              "Federated Learning": 2,
+              "Synthetic Data": 4
+            }
+          }
+        ]
+      },
+      {
+        "question": "What are your transparency requirements?",
+        "explanation": "Transparency requirements influence how much of your privacy stack you need to disclose — to the public, regulators, or internal stakeholders.",
+        "answers": [
+          {
+            "text": "Must publish technical parameters - e.g., publishing ε values for DP, transformation logic, or encryption standards.",
+            "weights": {
+              "Anonymization": 6,
+              "Differential Privacy": 7,
+              "Cryptography": 1,
+              "Federated Learning": 4,
+              "Synthetic Data": 6
+            }
+          },
+          {
+            "text": "Can keep methods and keys fully private - common in regulated industries where public disclosure isn't required.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 2,
+              "Cryptography": 9,
+              "Federated Learning": 1,
+              "Synthetic Data": 2
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Control",
+    "goal": "Understand how privacy policies and rules are enforced in practice, including when and where transformations occur and what your team can manage.",
+    "insights": [
+      "Enforce your rules where it makes the most sense (on-device, at ingestion, or at query time).",
+      "Decide if you transform data once, on each access, or only in final reports—and make it consistent.",
+      "Lock down raw data reads or layer in noise so nobody sees sensitive bits directly.",
+      "Know which capabilities (key management, DP budgets) you already support before picking a tech."
+    ],
+    "questions": [
+      {
+        "question": "At which stage of your data pipeline do you prefer to enforce privacy transformations?",
+        "explanation": "Privacy transformations can happen at different points in your system — before data leaves a device, as it enters your system, during queries, or at the reporting stage. The choice affects both risk and performance.",
+        "answers": [
+          {
+            "text": "On the user’s device before transmission – ideal for sensitive data collection, often used in federated learning.",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 9,
+              "Cryptography": 2,
+              "Federated Learning": 9,
+              "Synthetic Data": 3
+            }
+          },
+          {
+            "text": "At ingestion into your central systems – popular for centralized architectures using strong encryption or anonymization.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 3,
+              "Cryptography": 8,
+              "Federated Learning": 3,
+              "Synthetic Data": 2
+            }
+          },
+          {
+            "text": "At each analytic query (on-demand) – used for differential privacy budgets or query-time masking.",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 8,
+              "Cryptography": 4,
+              "Federated Learning": 4,
+              "Synthetic Data": 5
+            }
+          },
+          {
+            "text": "Only when producing final reports – simple but risky; best suited to aggregate-only outputs.",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 4,
+              "Cryptography": 2,
+              "Federated Learning": 1,
+              "Synthetic Data": 6
+            }
+          }
+        ]
+      },
+      {
+        "question": "How frequently is data transformed?",
+        "explanation": "Frequency of transformation determines the freshness and variability of privacy enforcement — once during ingestion or on every access.",
+        "answers": [
+          {
+            "text": "One-time at ingestion – simpler, but may allow more risk over time.",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 2,
+              "Cryptography": 6,
+              "Federated Learning": 2,
+              "Synthetic Data": 4
+            }
+          },
+          {
+            "text": "Per-access or per-query noise – stronger privacy, often used with DP or synthetic generation.",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 8,
+              "Cryptography": 5,
+              "Federated Learning": 4,
+              "Synthetic Data": 7
+            }
+          }
+        ]
+      },
+      {
+        "question": "How is raw-data access handled?",
+        "explanation": "Controlling access to raw data is crucial. Some systems prohibit direct access; others allow it but modify responses.",
+        "answers": [
+          {
+            "text": "Block raw-data reads entirely – secure and compliant by default.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 1,
+              "Cryptography": 8,
+              "Federated Learning": 4,
+              "Synthetic Data": 6
+            }
+          },
+          {
+            "text": "Allow access but inject noise each time – useful for auditability or live querying with privacy guarantees.",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 9,
+              "Cryptography": 2,
+              "Federated Learning": 3,
+              "Synthetic Data": 5
+            }
+          }
+        ]
+      },
+      {
+        "question": "Which capability does your team already manage?",
+        "explanation": "Choose privacy techniques that your organization is already equipped to support, or that align with your existing toolchain.",
+        "answers": [
+          {
+            "text": "Encryption key management ready – typical in security-first or cloud-native stacks.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 3,
+              "Cryptography": 8,
+              "Federated Learning": 3,
+              "Synthetic Data": 2
+            }
+          },
+          {
+            "text": "DP noise-budget tracking ready – common in research settings or DP-enabled platforms.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 8,
+              "Cryptography": 3,
+              "Federated Learning": 4,
+              "Synthetic Data": 5
+            }
+          },
+          {
+            "text": "Neither capability established – may benefit from synthetic data or simplified anonymization.",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 1,
+              "Cryptography": 1,
+              "Federated Learning": 1,
+              "Synthetic Data": 8
+            }
+          }
+        ]
+      },
+      {
+        "question": "What level of audit logging is required?",
+        "explanation": "Audit logs record data access or processing events. They support compliance, traceability, and incident response.",
+        "answers": [
+          {
+            "text": "Full, record-level audit logs – essential for regulated environments like healthcare or finance.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 1,
+              "Cryptography": 8,
+              "Federated Learning": 5,
+              "Synthetic Data": 3
+            }
+          },
+          {
+            "text": "Only summary-level reports – useful when dealing with aggregates or public-facing data.",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 6,
+              "Cryptography": 3,
+              "Federated Learning": 2,
+              "Synthetic Data": 5
+            }
+          },
+          {
+            "text": "No formal logging requirement – lowest effort, suitable only when risk is minimal.",
+            "weights": {
+              "Anonymization": 8,
+              "Differential Privacy": 4,
+              "Cryptography": 2,
+              "Federated Learning": 1,
+              "Synthetic Data": 4
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Communicate",
+    "goal": "Determine who needs to be informed about privacy measures and how much technical detail to share.",
+    "insights": [
+      "Publish clear, jargon-free notices so everyone knows what you do with data.",
+      "Provide easy feedback channels (dashboards, surveys) so users and partners can ask questions.",
+      "Maintain simple records of data disclosures and corrections—summaries often suffice.",
+      "Notify affected parties quickly if anything goes wrong and explain how you’ll fix it."
+    ],
+    "questions": [
+      {
+        "question": "Who is the primary audience for your privacy reports?",
+        "explanation": "Understanding who you’re reporting to — internal teams, external users, or regulators — affects how you frame and explain your privacy practices.",
+        "answers": [
+          {
+            "text": "Internal staff – e.g., engineering, legal, compliance, product. Reports may be technical.",
+            "weights": {
+              "Anonymization": 3,
+              "Differential Privacy": 6,
+              "Cryptography": 7,
+              "Federated Learning": 5,
+              "Synthetic Data": 4
+            }
+          },
+          {
+            "text": "External regulators/customers – requires clarity and transparency for non-technical audiences.",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 5,
+              "Cryptography": 2,
+              "Federated Learning": 2,
+              "Synthetic Data": 6
+            }
+          }
+        ]
+      },
+      {
+        "question": "What level of technical detail must be disclosed?",
+        "explanation": "Some audiences (e.g., regulators) require full specs, while others (e.g., end-users) prefer summaries.",
+        "answers": [
+          {
+            "text": "Exact technical specs (ε-values, cipher suites) – typical for auditors or expert review.",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 7,
+              "Cryptography": 8,
+              "Federated Learning": 6,
+              "Synthetic Data": 5
+            }
+          },
+          {
+            "text": "High-level summary only – easier for general users to understand.",
+            "weights": {
+              "Anonymization": 8,
+              "Differential Privacy": 5,
+              "Cryptography": 2,
+              "Federated Learning": 3,
+              "Synthetic Data": 6
+            }
+          }
+        ]
+      },
+      {
+        "question": "Must end-users be notified about the privacy transforms applied?",
+        "explanation": "Some regulations require end-user notifications or consent about data transformation; others allow internal-only documentation.",
+        "answers": [
+          {
+            "text": "Yes – notify users (opt-in/out, dashboards) – improves transparency and trust.",
+            "weights": {
+              "Anonymization": 5,
+              "Differential Privacy": 7,
+              "Cryptography": 2,
+              "Federated Learning": 4,
+              "Synthetic Data": 6
+            }
+          },
+          {
+            "text": "No – internal only – suitable for backend systems or low-sensitivity data.",
+            "weights": {
+              "Anonymization": 3,
+              "Differential Privacy": 2,
+              "Cryptography": 8,
+              "Federated Learning": 2,
+              "Synthetic Data": 3
+            }
+          }
+        ]
+      },
+      {
+        "question": "How often do you need to publish compliance reports?",
+        "explanation": "Reporting frequency shows how accountable and visible your privacy practices are — from real-time dashboards to annual audits.",
+        "answers": [
+          {
+            "text": "Real-time or near-real-time dashboards – for regulators, customers, or internal monitoring.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 8,
+              "Cryptography": 7,
+              "Federated Learning": 5,
+              "Synthetic Data": 4
+            }
+          },
+          {
+            "text": "Quarterly/Annual summaries – useful for governance or board-level reporting.",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 4,
+              "Cryptography": 6,
+              "Federated Learning": 3,
+              "Synthetic Data": 5
+            }
+          }
+        ]
+      },
+      {
+        "question": "Do you require mechanisms for stakeholder feedback on privacy controls?",
+        "explanation": "Feedback channels show your privacy program is open to input — from users, partners, or internal stakeholders.",
+        "answers": [
+          {
+            "text": "Yes – feedback loops needed – e.g., surveys, user opt-outs, or dashboards.",
+            "weights": {
+              "Anonymization": 6,
+              "Differential Privacy": 6,
+              "Cryptography": 3,
+              "Federated Learning": 4,
+              "Synthetic Data": 5
+            }
+          },
+          {
+            "text": "No – one-way reporting – used in tightly controlled or internal-only systems.",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 3,
+              "Cryptography": 7,
+              "Federated Learning": 2,
+              "Synthetic Data": 3
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Protect",
+    "goal": "Pinpoint the technical threat models and performance constraints that determine which privacy technologies meet your security and usability needs.",
+    "insights": [
+      "Choose encryption or shielding methods that block real attackers from stealing data.",
+      "Require strong authentication so only the right users and services get access.",
+      "Keep infrastructure patched, backed up, and resilient to failures or attacks.",
+      "Match each technology (DP, crypto, federated learning, synthetic data) to your real-world threats and latency needs."
+    ],
+    "questions": [
+      {
+        "question": "What is your primary privacy threat model?",
+        "explanation": "Your privacy protection choice depends on what kind of risk you're most worried about — hackers stealing data, or analysts learning too much from outputs.",
+        "answers": [
+          {
+            "text": "Data theft/exfiltration (e.g., hacks) – your goal is to stop external attackers from accessing raw data.",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 1,
+              "Cryptography": 9,
+              "Federated Learning": 4,
+              "Synthetic Data": 3
+            }
+          },
+          {
+            "text": "Inference/re-identification from outputs – your goal is to limit what can be learned from statistical queries.",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 9,
+              "Cryptography": 1,
+              "Federated Learning": 5,
+              "Synthetic Data": 6
+            }
+          }
+        ]
+      },
+      {
+        "question": "How critical is exact, bit-perfect output?",
+        "explanation": "Some applications need outputs to match exactly (e.g., billing systems). Others can tolerate approximate results (e.g., analytics dashboards).",
+        "answers": [
+          {
+            "text": "Exact, bit-for-bit correct outputs required – e.g., legal documents, payments, or audit logs.",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 1,
+              "Cryptography": 9,
+              "Federated Learning": 6,
+              "Synthetic Data": 2
+            }
+          },
+          {
+            "text": "Approximate/noisy outputs acceptable – e.g., machine learning models, statistics.",
+            "weights": {
+              "Anonymization": 5,
+              "Differential Privacy": 9,
+              "Cryptography": 1,
+              "Federated Learning": 5,
+              "Synthetic Data": 8
+            }
+          }
+        ]
+      },
+      {
+        "question": "What are your performance (latency) requirements?",
+        "explanation": "Performance needs (especially latency) impact which tech you can use. Cryptography is fast; DP and synthetic methods can add delay.",
+        "answers": [
+          {
+            "text": "Sub-100 ms (real-time) – needed for apps like fraud detection or messaging.",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 3,
+              "Cryptography": 9,
+              "Federated Learning": 3,
+              "Synthetic Data": 2
+            }
+          },
+          {
+            "text": "Batch OK (minutes/hours allowed) – e.g., nightly ML training or compliance reports.",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 8,
+              "Cryptography": 3,
+              "Federated Learning": 5,
+              "Synthetic Data": 7
+            }
+          }
+        ]
+      },
+      {
+        "question": "At what scope must data be protected?",
+        "explanation": "Some systems only need encryption at-rest/in-transit. Others require protection even during computation or training.",
+        "answers": [
+          {
+            "text": "Only in-transit and at-rest – basic compliance like TLS and encrypted databases.",
+            "weights": {
+              "Anonymization": 3,
+              "Differential Privacy": 1,
+              "Cryptography": 9,
+              "Federated Learning": 2,
+              "Synthetic Data": 2
+            }
+          },
+          {
+            "text": "Also needs protection during analytics/training – e.g., in collaborative ML or cloud pipelines.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 8,
+              "Cryptography": 2,
+              "Federated Learning": 9,
+              "Synthetic Data": 7
+            }
+          }
+        ]
+      },
+      {
+        "question": "What is your trust model for raw data?",
+        "explanation": "Trust models define who (if anyone) can be allowed to see raw data — which guides whether centralized or distributed techniques are appropriate.",
+        "answers": [
+          {
+            "text": "Single trusted curator (centralized keys) – e.g., your own data lake or warehouse.",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 2,
+              "Cryptography": 8,
+              "Federated Learning": 3,
+              "Synthetic Data": 3
+            }
+          },
+          {
+            "text": "No one party may see raw data (fully trustless) – e.g., collaborative analytics across multiple orgs.",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 7,
+              "Cryptography": 1,
+              "Federated Learning": 9,
+              "Synthetic Data": 6
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

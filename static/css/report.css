@@ -1,0 +1,452 @@
+/* Layout Tweaks */
+.center-box { display: none !important; }
+.fullscreen-bg {
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  padding: 3rem;
+}
+
+/* Spacer */
+.spacer-row { height: 80px; }
+.spacer-second-row { height: 50px; padding-bottom: 6rem; }
+
+/* Columns */
+.pink-col,
+.red-col { background-color: transparent; }
+.red-col .row { align-items: flex-start; }
+
+/* Tech Description Container (blue theme) */
+#tech-descr-container {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(10,10,50,0.9) 0%, transparent 70%),
+    radial-gradient(circle at 80% 80%, rgba(20,40,100,0.7) 0%, transparent 60%),
+    rgba(10,10,60,0.8);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+  color: #fff;
+  padding: 2rem;
+  margin: 0.5rem;
+  border-radius: 12px;
+  text-align: left;
+  height: 536px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.8) transparent;
+}
+#tech-descr-container::-webkit-scrollbar { width: 6px; }
+#tech-descr-container::-webkit-scrollbar-track { background: transparent; }
+#tech-descr-container::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.8);
+  border-radius: 3px;
+}
+
+/* Ranking Block & 3D Setup */
+.ranking-cell {
+  perspective: 800px;
+  overflow: visible;
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.ranking-cell:hover,
+.ranking-cell:visited,
+.ranking-cell:active { text-decoration: none; }
+
+.ranking-block {
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255,255,255,0.20) 0%, transparent 70%),
+    radial-gradient(circle at 75% 80%, rgba(255,255,255,0.12) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+    rgba(0,0,0,0.7);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  color: #fff;
+  padding: 1.5rem;
+  margin: 0.5rem;
+  border-radius: 12px;
+  text-align: left;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  flex: 0 1 auto;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.overall-cell .ranking-block {
+  background:
+    radial-gradient(circle at 25% 20%, rgba(0,0,0,0.30) 0%, transparent 70%),
+    radial-gradient(circle at 75% 80%, rgba(0,0,0,0.20) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(0,0,0,0.10) 0%, transparent 50%),
+    rgba(10,10,20,0.85);
+  backdrop-filter: blur(12px) saturate(200%);
+  -webkit-backdrop-filter: blur(12px) saturate(200%);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 48px rgba(0,0,0,0.8);
+}
+.ranking-cell:not(.overall-cell) .ranking-block:hover {
+  transform: translateZ(30px) scale(1.03);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+  cursor: pointer;
+}
+
+/* Ranking List & Typography */
+.ranking-list { list-style: none; margin: 0; padding: 0; }
+.ranking-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.ranking-item,
+.ranking-points { font-size: 1.1rem; line-height: 1.4; font-family: 'Manrope', sans-serif; }
+.ranking-item { flex: 1; padding-right: 0.5rem; }
+.ranking-points { width: 4em; text-align: right; white-space: nowrap; }
+
+/* Headings Gradient Text */
+#tech-descr-container h2,
+.ranking-block h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-family: 'Manrope', Arial, sans-serif !important;
+  background: linear-gradient(to bottom, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+}
+
+/* Link Styling */
+.ranking-link { display: block; text-decoration: none; color: inherit; }
+.ranking-link:hover { cursor: pointer; }
+
+/* Typewriter */
+.typewriter-container { position: relative; display: inline-block; margin-left: 1rem; }
+.static-text {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 3rem;
+  color: transparent;
+  text-transform: none;
+}
+.placeholder {
+  position: absolute; top: 0; left: 0; overflow: hidden; white-space: nowrap;
+  width: 0; border-right: 2px solid white;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 3rem; color: white;
+  animation: typing 2s steps(30,end) forwards, blink-caret .75s step-end 1s 1 forwards;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.4)) drop-shadow(0 -1px 1px rgba(255,255,255,0.5));
+}
+@keyframes typing { from { width: 0; } to   { width: 100%; } }
+@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: white; } }
+
+
+.crypto-bar-row {
+  position: fixed;
+  bottom: 2rem;  /* or `top: 0` if you prefer it stuck to top */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.crypto-bar-row .btn-crypto {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(0,0,0,0.30) 0%, transparent 70%),
+    radial-gradient(circle at 75% 80%, rgba(0,0,0,0.20) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(0,0,0,0.10) 0%, transparent 50%),
+    rgba(10,10,20,0.85) !important;
+  color: #b1afaf !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  padding: 6px 16px !important;
+  font-family: 'Manrope', Arial, sans-serif !important;
+  font-size: 1.125rem !important;
+  font-weight: bold !important;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  pointer-events: all;
+}
+.crypto-bar-row .btn-crypto::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 300%; height: 300%;
+  background: linear-gradient(
+    30deg,
+    transparent 20%,
+    transparent 40%,
+    rgba(255,255,255,0.2) 50%,
+    rgba(255,255,255,0.2) 55%,
+    transparent 70%,
+    transparent 100%
+  );
+  transform: translateX(100%) rotate(45deg);
+  z-index: 2;
+}
+.crypto-bar-row .btn-crypto:hover::after {
+  animation: shine 1.2s ease-in-out 0s 1 forwards;
+}
+@keyframes shine {
+  to { transform: translateX(-100%) rotate(45deg); }
+}
+
+/* Question Box */
+.question-box {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255,255,255,0.20) 0%, transparent 70%),
+    radial-gradient(circle at 75% 80%, rgba(255,255,255,0.12) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+    rgba(0,16,0,0.9);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  color: #fff;
+  position: relative;
+  align-self: stretch;
+  height: 100%;
+}
+.question-box .question-text {
+  flex: 0 0 auto;
+  /* allow wrapping content to grow the box, but keep a 100px minimum */
+  min-height: 80px;
+  box-sizing: border-box;  /* so your padding stays inside that min-height */
+  padding: 20px;
+}
+
+.question-box .answers-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+.question-box .answers {
+  flex: 1;
+  overflow-y: auto;
+  list-style: none;
+  margin: 1rem;
+  padding: 20px;
+}
+.question-box .answers li {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-family: 'Manrope', sans-serif;
+  color: #fff;
+  background: transparent;
+}
+.question-box .answers li:hover { background: rgba(255,255,255,0.1); }
+.question-box .answers li.selected {
+  background: rgba(0,160,64,0.6);
+  border-color: rgba(0,160,64,0.8);
+}
+
+/* Crypto-specific spacer & intro */
+.spacer-third-row { height: 10rem; }
+
+.crypto-intro {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-family: 'Manrope', Arial, sans-serif !important;
+  background: linear-gradient(to bottom, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+}
+
+/* 1) Make the outer grid a flex container and stretch its columns to the same height */
+.equalize-grid {
+  display: flex;
+  align-items: stretch;  /* children cols will all be as tall as the tallest */
+}
+
+/* 2) Turn each side into a column-flex so they can split their own space */
+.equalize-grid > .pink-col,
+.equalize-grid > .red-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 3) On the right-hand (red) side, let its inner .container-fluid fill all of that height */
+.equalize-grid .red-col .container-fluid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 4) Split that red-side container into two equal rows */
+.equalize-grid .red-col .container-fluid > .row {
+  flex: 1;
+  display: flex;        /* so each inner <a> can flex too */
+}
+
+/* 5) Make each ranking‐cell flex to fill its row’s height */
+.equalize-grid .red-col .ranking-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.equalize-grid .ranking-cell .ranking-block {
+  /* fill its parent column */
+  flex: 1 1 0;
+  /* ensure full height */
+  height: 100%;
+}
+
+/* ---- Differential Privacy toggle bar ---- */
+.dp-bar-row {
+  position: fixed;
+  bottom: 2rem;  /* same as .crypto-bar-row */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.dp-bar-row .btn-dp {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(0,0,0,0.30) 0%, transparent 70%),
+    radial-gradient(circle at 75% 80%, rgba(0,0,0,0.20) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(0,0,0,0.10) 0%, transparent 50%),
+    rgba(10,10,20,0.85) !important;
+  color: #b1afaf !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  padding: 6px 16px !important;
+  font-family: 'Manrope', Arial, sans-serif !important;
+  font-size: 1.125rem !important;
+  font-weight: bold !important;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  pointer-events: all;
+}
+.dp-bar-row .btn-dp::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 300%; height: 300%;
+  background: linear-gradient(
+    30deg,
+    transparent 20%,
+    transparent 40%,
+    rgba(255,255,255,0.2) 50%,
+    rgba(255,255,255,0.2) 55%,
+    transparent 70%,
+    transparent 100%
+  );
+  transform: translateX(100%) rotate(45deg);
+  z-index: 2;
+}
+.dp-bar-row .btn-dp:hover::after {
+  animation: shine 1.2s ease-in-out 0s 1 forwards;
+}
+
+/* reuse existing shine keyframes */
+@keyframes shine {
+  to { transform: translateX(-100%) rotate(45deg); }
+}
+
+/* ---- DP spacer & intro ---- */
+.spacer-dp-row { 
+  height: 10rem;  /* same as .spacer-third-row */ 
+}
+
+.dp-intro-row .dp-intro {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-family: 'Manrope', Arial, sans-serif !important;
+  background: linear-gradient(to bottom, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+}
+
+/* DP-specific Question Box (dark burgundy theme) */
+.dp-question-box {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255,255,255,0.20) 0%, transparent 70%),
+    radial-gradient(circle at 75% 80%, rgba(255,255,255,0.12) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+    rgba(32, 0, 16, 0.95); /* darker, more opaque burgundy */
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  position: relative;
+  align-self: stretch;
+  height: 100%;
+}
+
+/* Optionally tweak the header color inside */
+.dp-question-box .question-text h3 {
+  color: #f8d7da; /* pale pinkish to pop against burgundy */
+}
+
+/* DP-specific answer hover state */
+.dp-question-box .answers li:hover {
+  background: rgba(255,255,255,0.1);  /* same semi-light hover against dark background */
+}
+
+/* DP-specific selected state */
+.dp-question-box .answers li.selected {
+  background: rgba(139, 0, 0, 0.6);    /* dark red highlight */
+  border-color: rgba(139, 0, 0, 0.8);  /* deeper red border */
+}
+
+/* override overall to participate in the equal‐height flex grid */
+.overall-cell .ranking-block {
+  /* fill its parent flex‐cell just like the others */
+  flex: 1 1 0 !important;
+  height: 100%    !important;
+  margin: 0       !important;  /* in case you added any margin on .ranking-block */
+}
+.equalize-grid .ranking-cell {
+  display: flex;
+  flex-direction: column;
+  /* you can use padding here instead of margin on the blocks */
+  padding: 0.5rem;
+}
+
+.equalize-grid .ranking-cell .ranking-block {
+  /* all ranking‐blocks (including the one in .overall-cell) now fill 100% */
+  flex: 1 1 0;
+  height: 100%;
+  margin: 0;    /* remove any block margins */
+}

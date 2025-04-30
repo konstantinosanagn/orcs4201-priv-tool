@@ -1,0 +1,140 @@
+<!-- Author: Konstantinos Anagnostopoulos -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 1) Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    >
+
+    <!-- 2) Global layout rules -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/layout.css') }}"
+    >
+
+    <!-- 2.1) Utility styles (sidebar-next, etc.) -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/util.css') }}"
+    >
+
+    <!-- 3) Custom fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    >
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+
+    <!-- 3.1) Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    >
+
+    <!-- 4) Page-specific head overrides -->
+    {% block head %}{% endblock %}
+
+    <!-- 5) jQuery & Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    ></script>
+  </head>
+
+  <body>
+
+    <div class="container-fluid fullscreen-bg">
+      <!-- Navbar (pill-style) -->
+      <nav class="navbar">
+        <ul class="nav-tabs">
+          <!-- sliding background “pill” -->
+          <li class="tab-slider"></li>
+
+          <li>
+            <a
+              href="{{ url_for('home') }}"
+              class="{% if request.endpoint == 'home' %}active{% endif %}"
+              aria-label="Home"
+            >
+              <i class="bi bi-house-fill"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('identify') }}"
+              class="{% if request.endpoint == 'identify' %}active{% endif %}"
+            >
+              Identify
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('govern') }}"
+              class="{% if request.endpoint == 'govern' %}active{% endif %}"
+            >
+              Govern
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('control') }}"
+              class="{% if request.endpoint == 'control' %}active{% endif %}"
+            >
+              Control
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('communicate') }}"
+              class="{% if request.endpoint == 'communicate' %}active{% endif %}"
+            >
+              Communicate
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('protect') }}"
+              class="{% if request.endpoint == 'protect' %}active{% endif %}"
+            >
+              Protect
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('report') }}"
+              class="{% if request.endpoint == 'report' %}active{% endif %}"
+            >
+              Report
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Center placeholder -->
+      <div class="center-box">
+        {% block placeholder %}{% endblock %}
+      </div>
+
+      {% block sidebar_back %}{% endblock %}
+      {% block content %}{% endblock %}
+      {% block sidebar_next %}{% endblock %}
+    </div>
+
+    <!-- Page-specific scripts -->
+    {% block scripts %}
+      <script
+        src="{{ url_for('static', filename='js/layout.js') }}"
+        defer
+      ></script>
+    {% endblock %}
+  </body>
+  {% block overlays %}{% endblock %}
+
+</html>

@@ -1,0 +1,111 @@
+{
+    "category": "Differential Privacy",
+    "goal": "Help users select the appropriate DP model and mechanism by exploring trust assumptions, data contribution patterns, and analytical goals.",
+    "insights": [
+      "Choose Central DP if you have a trusted curator and can add noise before release.",
+      "Use Local DP or Randomized Response when trust is low and data must be privatized on-device.",
+      "Opt for User-Level DP if each person contributes multiple rows that need holistic protection.",
+      "Use Event-Level DP if privacy per row is sufficient and exact user linkage isn't necessary."
+    ],
+    "questions": [
+      {
+        "question": "Do you have access to raw user data on a secure server?",
+        "explanation": "This determines if Central DP is feasible or if noise must be added before data leaves the user.",
+        "answers": [
+          {
+            "text": "Yes – raw data is collected and stored centrally",
+            "weights": {"CentralDP": 9, "LocalDP": 1, "RandomizedResponse": 2, "UserLevelDP": 8, "EventLevelDP": 4}
+          },
+          {
+            "text": "No – users must send already privatized data",
+            "weights": {"CentralDP": 1, "LocalDP": 9, "RandomizedResponse": 8, "UserLevelDP": 2, "EventLevelDP": 6}
+          }
+        ]
+      },
+      {
+        "question": "Can a user contribute multiple data points to your system?",
+        "explanation": "If yes, then user-level DP may be needed. Otherwise, event-level may suffice.",
+        "answers": [
+          {
+            "text": "Yes – users may generate many rows (e.g., browsing history)",
+            "weights": {"CentralDP": 7, "LocalDP": 5, "RandomizedResponse": 2, "UserLevelDP": 9, "EventLevelDP": 3}
+          },
+          {
+            "text": "No – each user contributes only one or two events",
+            "weights": {"CentralDP": 5, "LocalDP": 7, "RandomizedResponse": 6, "UserLevelDP": 3, "EventLevelDP": 9}
+          }
+        ]
+      },
+      {
+        "question": "What kind of analysis do you want to run on this data?",
+        "explanation": "Determines whether simple queries or model training are expected.",
+        "answers": [
+          {
+            "text": "Basic aggregates (e.g., histograms, counts)",
+            "weights": {"CentralDP": 7, "LocalDP": 6, "RandomizedResponse": 8, "UserLevelDP": 5, "EventLevelDP": 8}
+          },
+          {
+            "text": "Complex analysis or ML model training",
+            "weights": {"CentralDP": 8, "LocalDP": 3, "RandomizedResponse": 2, "UserLevelDP": 9, "EventLevelDP": 4}
+          }
+        ]
+      },
+      {
+        "question": "Is it acceptable to release slightly inaccurate (noisy) statistics?",
+        "explanation": "Determines how much noise is tolerable.",
+        "answers": [
+          {
+            "text": "Yes – accuracy can be relaxed to ensure privacy",
+            "weights": {"CentralDP": 7, "LocalDP": 6, "RandomizedResponse": 8, "UserLevelDP": 6, "EventLevelDP": 7}
+          },
+          {
+            "text": "No – results must be very close to exact",
+            "weights": {"CentralDP": 5, "LocalDP": 2, "RandomizedResponse": 1, "UserLevelDP": 3, "EventLevelDP": 5}
+          }
+        ]
+      },
+      {
+        "question": "Do you trust the server or data curator to see raw data?",
+        "explanation": "Local DP methods are designed for untrusted environments.",
+        "answers": [
+          {
+            "text": "Yes – the server is a trusted party",
+            "weights": {"CentralDP": 9, "LocalDP": 2, "RandomizedResponse": 2, "UserLevelDP": 8, "EventLevelDP": 6}
+          },
+          {
+            "text": "No – data must be protected before reaching the server",
+            "weights": {"CentralDP": 1, "LocalDP": 9, "RandomizedResponse": 8, "UserLevelDP": 3, "EventLevelDP": 5}
+          }
+        ]
+      },
+      {
+        "question": "Will results be published once, or will the dataset be queried interactively?",
+        "explanation": "Interactive queries require stronger accounting and centralized control.",
+        "answers": [
+          {
+            "text": "One-time release (e.g., report or synthetic dataset)",
+            "weights": {"CentralDP": 5, "LocalDP": 7, "RandomizedResponse": 5, "UserLevelDP": 5, "EventLevelDP": 6}
+          },
+          {
+            "text": "Multiple interactive queries over time",
+            "weights": {"CentralDP": 9, "LocalDP": 3, "RandomizedResponse": 3, "UserLevelDP": 7, "EventLevelDP": 5}
+          }
+        ]
+      },
+      {
+        "question": "Is it important to protect users from being identified even if they contribute a lot of data?",
+        "explanation": "This gets at the core of user-level privacy guarantees.",
+        "answers": [
+          {
+            "text": "Yes – no one should know whether a user participated at all",
+            "weights": {"CentralDP": 8, "LocalDP": 5, "RandomizedResponse": 3, "UserLevelDP": 9, "EventLevelDP": 2}
+          },
+          {
+            "text": "No – we just want to mask each row/event",
+            "weights": {"CentralDP": 5, "LocalDP": 6, "RandomizedResponse": 7, "UserLevelDP": 3, "EventLevelDP": 9}
+          }
+        ]
+      }
+    ]
+  }
+  

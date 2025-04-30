@@ -1,0 +1,44 @@
+<!-- templates/control.html -->
+{% extends 'layout.html' %}
+
+{% block head %}
+  {{ super() }}
+  <!-- page-specific CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/control.css') }}">
+  <!-- ensure Manrope is loaded -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+    rel="stylesheet">
+{% endblock %}
+
+{% block placeholder %}
+  <div id="control-container">
+    <h2 id="category"></h2>
+    <p id="goal"></p>
+
+    <!-- toggle button -->
+    <button id="insights-toggle" class="btn btn-light mt-3">
+      Show Insights
+    </button>
+
+    <!-- hidden by default -->
+    <div id="insights-container" class="insights-container"></div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="complete-container">
+    <a
+      id="complete-control"
+      class="btn"
+      href="{{ url_for('control_questions') }}">
+      Complete 'Control'
+    </a>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <!-- page-specific JS -->
+  <script src="{{ url_for('static', filename='js/control.js') }}" defer></script>
+{% endblock %}

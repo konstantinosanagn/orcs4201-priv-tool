@@ -1,0 +1,130 @@
+<!-- templates/home.html -->
+{% extends "layout.html" %}
+
+{% block title %}Home – Policy for Privacy Technology{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5">
+  <div class="row">
+
+    <!-- Left column: typewriter + badge -->
+    <div class="col-md-6 d-flex align-items-center position-relative">
+      <div class="typewriter-panel w-100">
+        <div class="static-text manrope">Demystifying</div>
+        <div class="typewriter-container">
+          <span id="typed-text"></span><span class="cursor">|</span>
+        </div>
+      </div>
+
+      <div class="inspiration-badge">
+        <span class="static-text-sm">Inspired by:</span>
+        <img
+          src="{{ url_for('static', filename='images/nist-icon.png') }}"
+          alt="NIST logo"
+          class="nist-icon"
+        />
+        <span class="static-text-sm">and</span>
+        <img
+          src="{{ url_for('static', filename='images/columbia-crop-icon.png') }}"
+          alt="Columbia logo"
+          class="columbia-icon"
+        />
+      </div>
+    </div>
+
+      <!-- Right column: info panel -->
+      <div class="col-md-6 d-flex align-items-center justify-content-end">
+        <div class="info-panel w-100">
+          <div class="marquee-viewport">
+            <div class="pill-marquee">
+              <div class="pill-row">
+                <span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/linkedin-icon.png') }}"
+          alt="LinkedIn"
+        />
+      </span> LinkedIn → Differential Privacy | Central DP (Salary Insights) | ε ≈ 0.75</div>
+    <div class="pill-row"><span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/google-icon.png') }}"
+          alt="Google"
+        />
+      </span>Google → Differential Privacy | Local DP (Chrome, Android telemetry) | ε ≈ 1–2</div>
+    <div class="pill-row"><span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/apple-icon.png') }}"
+          alt="Apple"
+        />
+      </span>Apple → Differential Privacy | Local DP (iOS Keyboard, Health) | ε ≈ 1–2</div>
+    <div class="pill-row"><span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/microsoft-icon.png') }}"
+          alt="Microsoft"
+        />
+      </span>Microsoft → Differential Privacy | Central DP (Windows telemetry) | ε ≈ 1</div>
+    <div class="pill-row">  <span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/meta-icon.png') }}"
+          alt="Meta"
+        />
+      </span> Meta (Facebook) → Multi-Party Computation (MPC) | Private Lift Measurement </div>
+    <div class="pill-row"><span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/amazon-icon.png') }}"
+          alt="Amazon"
+        />
+      </span>Amazon (AWS) → Cryptography | Homomorphic Encryption (AWS Clean Rooms) </div>
+    <div class="pill-row"><span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/whatsApp-icon.png') }}"
+          alt="WhatsApp"
+        />
+      </span>WhatsApp → Cryptography | Public Key Encryption (Signal Protocol) </div>
+    <div class="pill-row"><span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/dropbox-icon.png') }}"
+          alt="Dropbox"
+        />
+      </span>Dropbox → Cryptography | Symmetric Encryption (AES-256) </div>
+    <div class="pill-row"><span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/snapchat-icon.png') }}"
+          alt="Snapchat"
+        />
+      </span>Snapchat → Differential Privacy | Local DP (ad analytics) | ε ≈ 1–2</div>
+    <div class="pill-row"><span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/x-icon.png') }}"
+          alt="X"
+        />
+      </span>Twitter (X) → Cryptography | Public Key Encryption (E2EE DMs) </div>
+    <div class="pill-row"><span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/mayo-clinic-icon.png') }}"
+          alt="Mayo Clinic"
+        />
+      </span>Mayo Clinic → Anonymization | k-Anonymity (research datasets) </div>
+    <div class="pill-row"><span class="pill-icon">
+        <img
+          src="{{ url_for('static', filename='images/ibm-icon.png') }}"
+          alt="IBM"
+        />
+      </span>IBM → Cryptography | Attribute-Based Encryption </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/home.js') }}" defer></script>
+{% endblock %}

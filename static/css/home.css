@@ -1,0 +1,213 @@
+/* static/css/home.css */
+
+.center-box {
+    background: none;
+}
+
+/* — Typewriter panel — */
+.typewriter-panel {
+    /* let the grid position it */
+    width: 100%;
+    text-align: left;
+    /* you can still override font, spacing, etc. */
+  }
+  
+  .static-text {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    filter:
+      drop-shadow(0 2px 2px rgba(0,0,0,0.3))
+      drop-shadow(0 -1px 1px rgba(255,255,255,0.5));
+  }
+  
+  .manrope {
+    font-family: 'Manrope', 'Bebas Neue', Arial, sans-serif;
+    font-weight: 700;
+  }
+  
+  .typewriter-container {
+    display: inline-flex;
+    align-items: center;
+    font-family: monospace;
+    font-size: 2.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .typewriter-container #typed-text {
+    background: linear-gradient(
+      120deg,
+      #777 10%, #eee 25%, #aaa 40%, #eee 60%, #777 75%, #ddd 90%
+    );
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: metal-wave 1.5s linear infinite;
+    will-change: background-position;
+  }
+  
+  @keyframes metal-wave {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+  
+  .cursor {
+    margin-left: 0.1em;
+    animation: blink 0.7s step-end infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  
+  
+  /* — Info-panel — */
+  .info-panel {
+    /* let Bootstrap grid position it */
+    position: relative;
+    width: 100%;
+    max-width: 80%;
+    height: 67vh;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 16px;
+    padding: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    font-size: small;
+    font-family: monospace;
+    margin: 0 auto;
+  }
+  
+/* make each pill-row a flexbox and center icon + text vertically */
+.info-panel .pill-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;             /* space between icon and text */
+    margin: 8px 0;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border-radius: 9999px;
+    transition: transform 0.3s ease, z-index 0.3s ease, background 0.3s ease;
+  }
+  
+  /* gradient fades at top & bottom */
+  .info-panel::before,
+  .info-panel::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .info-panel::before {
+    top: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 30%,
+      transparent 100%
+    );
+  }
+  .info-panel::after {
+    bottom: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 30%,
+      transparent 100%
+    );
+  }
+  
+  
+  /* — Marquee inside info-panel — */
+  .marquee-viewport {
+    position: relative;
+    top: 0; bottom: 0; left: 0; right: 0;
+    overflow: hidden;
+    height: 100%;
+  }
+  
+  .pill-marquee {
+    display: flex;
+    flex-direction: column;
+    animation-name: scroll-up;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes scroll-up {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+  
+/* ensure the icon box stays square */
+.pill-icon {
+    flex: 0 0 1.2em;        /* fixed width/height */
+    height: 1.2em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .pill-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+ /* make the left col a positioning context */
+.col-md-6.position-relative {
+    position: relative;
+  }
+  
+  /* the badge at bottom-left */
+  .inspiration-badge {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  
+  }
+  
+  
+  /* reuse static-text look, but smaller */
+  .static-text-sm {
+    font-family: 'Manrope', Arial, sans-serif !important;
+    text-transform: none;
+    font-size: 1.25rem;
+    
+    /* gradient from white at top → light gray at bottom */
+    background: linear-gradient(to bottom, #fff 0%, #aaa 100%);
+    -webkit-background-clip: text;   /* for Chrome & Safari */
+    -webkit-text-fill-color: transparent;
+    background-clip: text;           /* for Firefox */
+    color: transparent;
+    
+    /* retain just the outer drop shadow */
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+  }
+  
+  
+  /* slightly larger NIST icon */
+  .nist-icon {
+    width: 40px;
+    height: auto;
+    margin-top: 2px;
+
+  }
+   
+   /* slightly larger NIST icon */
+   .columbia-icon {
+    width: 26px;
+    height: auto;
+    margin-bottom: 2px;
+  }

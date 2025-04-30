@@ -1,0 +1,55 @@
+/* report-grid.css */
+
+/* 1) Make the outer grid a flex container and stretch its columns to the same height */
+.equalize-grid {
+    display: flex;
+    align-items: stretch;  /* children cols will all be as tall as the tallest */
+  }
+  
+  /* 2) Turn each side (pink / red) into a column-flex so they can split their own space */
+  .equalize-grid > .pink-col,
+  .equalize-grid > .red-col {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 3) On the right-hand (red) side, let its inner .container-fluid fill all of that height */
+  .equalize-grid .red-col .container-fluid {
+    /* was flex:1; … */
+    flex: 0 1 auto;   /* <<< changed */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 4) Split that red-side container into two equal rows */
+  .equalize-grid .red-col .container-fluid > .row {
+    /* was flex:1; … */
+    flex: 0 1 auto;   /* <<< changed */
+    display: flex;
+  }
+  
+  /* 5) Make each ranking‐cell flex to fill its row’s height */
+  .equalize-grid .red-col .ranking-cell {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 6) Finally, have the .ranking-block itself stretch to fill its parent */
+  .equalize-grid .ranking-cell .ranking-block {
+    flex: 1 1 0;
+    height: 100%;
+  }
+
+/* 6) Have the tech description fill the pink-col height (which now matches the red-col’s auto-height) */
+.equalize-grid .pink-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .equalize-grid .pink-col #tech-descr-container {
+    /* override fixed height */
+    height: auto !important;
+    /* fill the pink-col (now stretched by the grid) */
+    flex: 1 1 0 !important;
+  }

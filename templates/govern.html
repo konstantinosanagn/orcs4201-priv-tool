@@ -1,0 +1,44 @@
+<!-- templates/govern.html -->
+{% extends 'layout.html' %}
+
+{% block head %}
+  {{ super() }}
+  <!-- page-specific CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/govern.css') }}">
+  <!-- ensure Manrope is loaded -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+    rel="stylesheet">
+{% endblock %}
+
+{% block placeholder %}
+  <div id="govern-container">
+    <h2 id="category"></h2>
+    <p id="goal"></p>
+
+    <!-- toggle button -->
+    <button id="insights-toggle" class="btn btn-light mt-3">
+      Show Insights
+    </button>
+
+    <!-- hidden by default -->
+    <div id="insights-container" class="insights-container"></div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="complete-container">
+    <a
+      id="complete-govern"
+      class="btn"
+      href="{{ url_for('govern_questions') }}">
+      Complete 'Govern'
+    </a>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <!-- page-specific JS -->
+  <script src="{{ url_for('static', filename='js/govern.js') }}" defer></script>
+{% endblock %}

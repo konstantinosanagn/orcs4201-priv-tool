@@ -1,0 +1,140 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+/* ==============================
+   Fullscreen Background Wrapper
+   ============================== */
+   .fullscreen-bg {
+    position: relative;      /* needed for absolute children */
+    min-height: 100vh !important;
+    overflow: hidden;
+  
+    display: flex;
+    align-items: center;     /* center everything except absolutely positioned */
+    justify-content: center;
+    border-radius: inherit;  /* so the inset shadow matches */
+  }
+  
+  .fullscreen-bg::before,
+  .fullscreen-bg::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+  }
+  
+  .fullscreen-bg::before {
+    background: white;
+    filter: blur(8px) brightness(0.6);
+    transform: scale(1.05);
+    z-index: -1;
+  }
+  
+  .fullscreen-bg::after {
+    pointer-events: none;
+    box-shadow: inset 0 0 200px 50px rgba(0, 0, 0, 0.6);
+    z-index: -1;
+  }
+  
+  /* ===================
+     Navbar (Pill tabs)
+     =================== */
+  .navbar {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+  
+    background-color: #000;
+    border-radius: 9999px;      /* full capsule */
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+    z-index: 1000;                 /* above background */
+  }
+  
+  /* Tab list */
+  .navbar .nav-tabs {
+    position: relative;         /* for the sliding pill */
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: none !important;
+  }
+  
+  /* Individual tab link */
+  .navbar .nav-tabs li {
+    margin: 0;
+  }
+  
+  .navbar .nav-tabs a {
+    position: relative;         /* so it sits above the slider */
+    z-index: 1;
+  
+    display: block;
+    padding: 0.5rem 1.5rem;
+    color: #cac9c9;
+    text-decoration: none;
+  
+    border-radius: 9999px;      /* pill */
+    transition:
+      background-color 300ms ease 200ms,
+      color 150ms ease;
+  }
+  
+  /* Hover & active states */
+  .navbar .nav-tabs a:hover,
+  .navbar .nav-tabs a.active {
+    background-color: #202020;
+    color: #fff;
+    transition-delay: 0ms;      /* snap back immediately */
+  }
+  
+/* sliding background “pill” as a list‐item child */
+.navbar .nav-tabs .tab-slider {
+    list-style: none;          /* hide the bullet */
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; width: 0;         /* initial size—will be set by JS */
+    background-color: #202020;
+    border-radius: 9999px;
+    transition:
+      left 300ms ease,
+      width 300ms ease;
+    z-index: 0;                /* behind the <a> links */
+  }
+  
+  
+  /* ===================
+     Typography Helpers
+     =================== */
+  .navbar .nav-tabs a,
+  .sidebar-next,
+  .sidebar-back {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-size: larger;
+  }
+  
+  /* ==============
+     Center Box
+     ============== */
+  .center-box {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+  }
+  

@@ -1,0 +1,43 @@
+/* report-typewriter.css */
+
+/* Typewriter */
+.typewriter-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 1rem;
+  }
+  
+  .static-text {
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 3rem;
+    color: transparent;
+    text-transform: none;
+  }
+  
+  .placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    border-right: 2px solid white;
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 3rem;
+    color: white;
+    animation: typing 2s steps(30,end) forwards,
+               blink-caret .75s step-end 1s 1 forwards;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.4))
+            drop-shadow(0 -1px 1px rgba(255,255,255,0.5));
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50%      { border-color: white; }
+  }
+  

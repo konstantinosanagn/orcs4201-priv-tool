@@ -1,0 +1,201 @@
+/* static/css/control.css */
+
+/* glass‐morphic center‐box */
+.center-box {
+    background:
+      radial-gradient(circle at 25% 20%, rgba(255,255,255,0.20) 0%, transparent 70%),
+      radial-gradient(circle at 75% 80%, rgba(255,255,255,0.12) 0%, transparent 60%),
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+      rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+    width: 650px;
+    border-radius: 12px;
+    height: auto !important;
+    display: block !important;
+  }
+  
+  /* category heading */
+  .center-box #category {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    font-family: 'Manrope', Arial, sans-serif !important;
+    text-transform: none;
+    
+    /* gradient from white at top → light gray at bottom */
+    background: linear-gradient(to bottom, #fff 0%, #aaa 100%);
+    -webkit-background-clip: text;   /* for Chrome & Safari */
+    -webkit-text-fill-color: transparent;
+    background-clip: text;           /* for Firefox */
+    color: transparent;
+    
+    /* retain just the outer drop shadow */
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+}
+  
+  /* goal text */
+  .center-box #goal {
+    font-size: 1.75rem;
+    line-height: 1.4;
+    font-family: 'Manrope', sans-serif;
+  }
+  
+  /* insights panel */
+  .insights-container {
+    position: relative;
+    display: none;
+    background-color: #444;
+    color: #ddd;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    text-align: left;
+  }
+  
+  /* insights credit */
+  .insights-container .insights-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: #bbb;
+    font-style: italic;
+  }
+  .insights-container .insights-credit span {
+    display: inline-flex;
+    align-items: center;
+  }
+  .insights-container .insights-credit .nist-logo {
+    width: 28px;
+    height: auto;
+    margin: 0 4px;
+    align-self: center;
+    margin-top: 3px;
+  }
+  
+  /* insights list */
+  .insights-container ul {
+    list-style: none;
+    padding: 20px;
+    margin-left: 0;
+    font-family: 'Manrope', Arial, sans-serif !important;
+  }
+  .insights-container li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* metallic toggle button */
+  #insights-toggle {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background: linear-gradient(
+      45deg,
+      #999 5%,
+      #fff 10%,
+      #ccc 30%,
+      #ddd 50%,
+      #ccc 70%,
+      #fff 80%,
+      #999 95%
+    ) !important;
+    color: rgb(58,58,58) !important;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+    border: none !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    padding: 6px 16px !important;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Manrope', Arial, sans-serif !important;
+    font-size: 1.125rem !important;
+    font-weight: bold !important;
+    letter-spacing: 0.5px;
+  }
+  #insights-toggle::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 300%; height: 300%;
+    background: linear-gradient(
+      30deg,
+      transparent 20%,
+      transparent 40%,
+      rgba(255,255,255,0.4) 50%,
+      rgba(255,255,255,0.4) 55%,
+      transparent 70%,
+      transparent 100%
+    );
+    transform: translateX(100%) rotate(45deg);
+    z-index: 2;
+  }
+  #insights-toggle:hover::after {
+    animation: shine 1.2s ease-in-out 0s 1 forwards;
+  }
+  @keyframes shine {
+    from { transform: translateX(100%) rotate(45deg); }
+    to   { transform: translateX(-100%) rotate(45deg); }
+  }
+  
+  /* bottom‐right wrapper for the complete button */
+  .complete-container {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 5;
+  }
+  
+  /* dark metallic “Complete” button */
+  #complete-control {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background: linear-gradient(
+      45deg,
+      #111,
+      #1a1a1a,
+      #2a2a2a,
+      #1a1a1a,
+      #111
+    ) !important;
+    color: #b1afaf !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    border: none !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    padding: 10px 24px !important;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Manrope', Arial, sans-serif !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px;
+  }
+  #complete-control::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 300%; height: 300%;
+    background: linear-gradient(
+      30deg,
+      transparent 20%,
+      transparent 40%,
+      rgba(255,255,255,0.2) 50%,
+      rgba(255,255,255,0.2) 55%,
+      transparent 70%,
+      transparent 100%
+    );
+    transform: translateX(100%) rotate(45deg);
+    z-index: 2;
+  }
+  #complete-control:hover::after {
+    animation: shine 1.2s ease-in-out 0s 1 forwards;
+  }
+  

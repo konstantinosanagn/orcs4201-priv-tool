@@ -1,0 +1,23 @@
+<!-- templates/identify_questions.html -->
+{% extends 'layout.html' %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/identify.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/identify_questions.css') }}">
+{% endblock %}
+
+{% block placeholder %}
+<div
+   id="questions-container"
+   data-category="Identify"
+   data-intro-url="{{ url_for('identify') }}"
+   data-complete-url="{{ url_for('govern') }}"
+></div>
+
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/identify_questions.js') }}" defer></script>
+{% endblock %}

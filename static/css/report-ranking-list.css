@@ -1,0 +1,34 @@
+/* report-ranking-list.css */
+
+/* — Ranking List & Typography — */
+.ranking-list {
+    list-style: none;
+    margin: 0;
+    /* padding is now controlled by report-ranking.css */
+  }
+  
+  .ranking-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .ranking-item,
+  .ranking-points {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    font-family: 'Manrope', sans-serif;
+  }
+  
+  .ranking-item {
+    flex: 1;
+    padding-right: 0.5rem;
+  }
+  
+  .ranking-points {
+    width: 4em;
+    text-align: right;
+    white-space: nowrap;
+  }
+  

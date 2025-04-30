@@ -1,0 +1,68 @@
+{# templates/report.html #}
+{% extends "layout.html" %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/report-base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/report-layout.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/report-grid.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/report-tech-description.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/report-ranking.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/report-ranking-list.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/report-typewriter.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/report-question-box.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/report-crypto-toggle.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/report-dp-toggle.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="w-100">
+    <!-- small spacer at top -->
+    <div class="row spacer-row"></div>
+    <!-- new extra spacer row with typewriter -->
+    <div class="row spacer-second-row">
+      <div class="col-12">
+        <div class="typewriter-container">
+          <span class="static-text">The privacy tool we recommend:</span>
+          <span class="placeholder">The privacy tool we recommend:</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-0 equalize-grid">
+      <div class="col-4 pink-col">
+        <div id="tech-descr-container" class="tech-descr-container"></div>
+      </div>
+      <div class="col-8 red-col">
+        <div class="container-fluid px-0">
+          <div class="row">
+            <a class="col-4 ranking-cell overall-cell" id="cell-overall"></a>
+            <a class="col-4 ranking-cell" href="{{ url_for('identify') }}" id="cell-identify"></a>
+            <a class="col-4 ranking-cell" href="{{ url_for('govern') }}" id="cell-govern"></a>
+          </div>
+          <div class="row">
+            <a class="col-4 ranking-cell" href="{{ url_for('control') }}" id="cell-control"></a>
+            <a class="col-4 ranking-cell" href="{{ url_for('communicate') }}" id="cell-communicate"></a>
+            <a class="col-4 ranking-cell" href="{{ url_for('protect') }}" id="cell-protect"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# invisible target for the Cryptography specifics scroll #}
+    <div id="crypto-specifics-section" style="height:1px;visibility:hidden;"></div>
+    
+    {# one full-width row/column for your JS to populate #}
+    <div class="row mt-5">
+      <div class="col-12 px-0">
+        <div id="crypto-questions-container"></div>
+        <div id="dp-questions-container"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script type="module" src="{{ url_for('static', filename='js/utils.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/report-core.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,59 @@
+/* Differential Privacy–specific toggle bar */
+.dp-bar-row {
+    position: fixed;
+    bottom: 2rem;  /* same as .crypto-bar-row */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    pointer-events: auto;
+  }
+  
+  .dp-bar-row .btn-dp {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 25% 20%, rgba(0,0,0,0.30) 0%, transparent 70%),
+      radial-gradient(circle at 75% 80%, rgba(0,0,0,0.20) 0%, transparent 60%),
+      radial-gradient(circle at 50% 50%, rgba(0,0,0,0.10) 0%, transparent 50%),
+      rgba(10,10,20,0.85) !important;
+    color: #b1afaf !important;
+    border: none !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    padding: 6px 16px !important;
+    font-family: 'Manrope', Arial, sans-serif !important;
+    font-size: 1.125rem !important;
+    font-weight: bold !important;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    pointer-events: all;
+  }
+  
+  .dp-bar-row .btn-dp::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 300%; height: 300%;
+    background: linear-gradient(
+      30deg,
+      transparent 20%,
+      transparent 40%,
+      rgba(255,255,255,0.2) 50%,
+      rgba(255,255,255,0.2) 55%,
+      transparent 70%,
+      transparent 100%
+    );
+    transform: translateX(100%) rotate(45deg);
+    z-index: 2;
+  }
+  
+  .dp-bar-row .btn-dp:hover::after {
+    animation: shine 1.2s ease-in-out 0s 1 forwards;
+  }
+  
+  /* Reuse shine keyframes */
+  @keyframes shine {
+    to { transform: translateX(-100%) rotate(45deg); }
+  }
+  

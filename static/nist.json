@@ -1,0 +1,718 @@
+[
+  {
+    "category": "Identify",
+    "goal": "Understand what data you have, at what level of granularity, and the re-identification risks.",
+    "insights": [
+      "Make a complete list of every system, dataset, and user that handles personal data.",
+      "Draw simple maps showing exactly where each piece of data travels and who touches it.",
+      "Link each data element back to its purpose so you never lose track of why it exists.",
+      "Highlight any operations that could let someone re-identify an individual."
+    ],
+    "questions": [
+      {
+        "question": "What level of data granularity are you working with?",
+        "answers": [
+          {
+            "text": "Individual-level records",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 0,
+              "Cryptography": 8,
+              "MPC": 5
+            }
+          },
+          {
+            "text": "Aggregate-only statistics",
+            "weights": {
+              "Anonymization": 5,
+              "Differential Privacy": 8,
+              "Cryptography": 1,
+              "MPC": 1
+            }
+          }
+        ]
+      },
+      {
+        "question": "Do you need to retain identifiers (PII) to re-link records later?",
+        "answers": [
+          {
+            "text": "Yes, re-linking required",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 2,
+              "Cryptography": 8,
+              "MPC": 4
+            }
+          },
+          {
+            "text": "No, can fully remove or hash them",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 6,
+              "Cryptography": 1,
+              "MPC": 1
+            }
+          }
+        ]
+      },
+      {
+        "question": "How high is your re-identification risk from quasi-identifiers?",
+        "answers": [
+          {
+            "text": "High",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 8,
+              "Cryptography": 3,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "Medium",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 5,
+              "Cryptography": 4,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "Low",
+            "weights": {
+              "Anonymization": 8,
+              "Differential Privacy": 2,
+              "Cryptography": 1,
+              "MPC": 1
+            }
+          }
+        ]
+      },
+      {
+        "question": "Must you track exactly which source record produced each analytic result?",
+        "answers": [
+          {
+            "text": "Yes – full audit trail is required",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 1,
+              "Cryptography": 8,
+              "MPC": 4
+            }
+          },
+          {
+            "text": "No – acceptable to lose individual link",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 6,
+              "Cryptography": 1,
+              "MPC": 1
+            }
+          }
+        ]
+      },
+      {
+        "question": "Will you ever join this data with another dataset (CRM, logs, third-party feeds)?",
+        "answers": [
+          {
+            "text": "Yes – cross-dataset joins planned",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 2,
+              "Cryptography": 6,
+              "MPC": 5
+            }
+          },
+          {
+            "text": "No – single dataset use only",
+            "weights": {
+              "Anonymization": 6,
+              "Differential Privacy": 5,
+              "Cryptography": 1,
+              "MPC": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Govern",
+    "goal": "Set your privacy rules (laws, policies, values), your organizational risk appetite, and the roles & oversight needed to enforce them.",
+    "insights": [
+      "Write down your privacy values, policies, and any legal must-haves so everyone knows the rules.",
+      "Decide how much privacy risk you’re willing to accept and share that clear limit organization-wide.",
+      "Assign specific owners and approvers for each control to avoid confusion over who’s responsible.",
+      "Review and update your governance regularly as business needs and laws change."
+    ],
+    "questions": [
+      {
+        "question": "Which privacy regulations apply to your organization?",
+        "answers": [
+          {
+            "text": "GDPR",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 5,
+              "Cryptography": 7,
+              "MPC": 1
+            }
+          },
+          {
+            "text": "HIPAA",
+            "weights": {
+              "Anonymization": 3,
+              "Differential Privacy": 2,
+              "Cryptography": 9,
+              "MPC": 1
+            }
+          },
+          {
+            "text": "CCPA",
+            "weights": {
+              "Anonymization": 5,
+              "Differential Privacy": 3,
+              "Cryptography": 6,
+              "MPC": 1
+            }
+          },
+          {
+            "text": "None/Other",
+            "weights": {
+              "Anonymization": 3,
+              "Differential Privacy": 3,
+              "Cryptography": 3,
+              "MPC": 3
+            }
+          }
+        ]
+      },
+      {
+        "question": "Does any regulation or internal policy mandate a specific technique?",
+        "answers": [
+          {
+            "text": "Encryption is explicitly required",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 1,
+              "Cryptography": 9,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "Differential Privacy is required",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 9,
+              "Cryptography": 2,
+              "MPC": 1
+            }
+          },
+          {
+            "text": "Anonymization/pseudonymization only",
+            "weights": {
+              "Anonymization": 9,
+              "Differential Privacy": 2,
+              "Cryptography": 1,
+              "MPC": 1
+            }
+          },
+          {
+            "text": "No specific mandate",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 4,
+              "Cryptography": 4,
+              "MPC": 4
+            }
+          }
+        ]
+      },
+      {
+        "question": "Who signs off on new privacy controls?",
+        "answers": [
+          {
+            "text": "Legal / Policy",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 6,
+              "Cryptography": 2,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "Security / IT",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 2,
+              "Cryptography": 6,
+              "MPC": 6
+            }
+          }
+        ]
+      },
+      {
+        "question": "How often must your privacy controls be reviewed or audited?",
+        "answers": [
+          {
+            "text": "Continuous / Automated",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 7,
+              "Cryptography": 7,
+              "MPC": 3
+            }
+          },
+          {
+            "text": "Annual / Manual",
+            "weights": {
+              "Anonymization": 6,
+              "Differential Privacy": 3,
+              "Cryptography": 5,
+              "MPC": 2
+            }
+          }
+        ]
+      },
+      {
+        "question": "What are your transparency requirements?",
+        "answers": [
+          {
+            "text": "Must publish technical parameters",
+            "weights": {
+              "Anonymization": 6,
+              "Differential Privacy": 7,
+              "Cryptography": 1,
+              "MPC": 1
+            }
+          },
+          {
+            "text": "Can keep methods and keys fully private",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 2,
+              "Cryptography": 9,
+              "MPC": 3
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Control",
+    "goal": "Understand how privacy policies and rules are enforced in practice, including when and where transformations occur and what your team can manage.",
+    "insights": [
+      "Enforce your rules where it makes the most sense (on-device, at ingestion, or at query time).",
+      "Decide if you transform data once, on each access, or only in final reports—and make it consistent.",
+      "Lock down raw data reads or layer in noise so nobody sees sensitive bits directly.",
+      "Know which capabilities (key management, DP budgets) you already support before picking a tech."
+    ],
+    "questions": [
+      {
+        "question": "At which stage of your data pipeline do you prefer to enforce privacy transformations?",
+        "answers": [
+          {
+            "text": "On the user’s device before transmission",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 9,
+              "Cryptography": 2,
+              "MPC": 3
+            }
+          },
+          {
+            "text": "At ingestion into your central systems",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 3,
+              "Cryptography": 8,
+              "MPC": 4
+            }
+          },
+          {
+            "text": "At each analytic query (on-demand)",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 8,
+              "Cryptography": 4,
+              "MPC": 6
+            }
+          },
+          {
+            "text": "Only when producing final reports",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 4,
+              "Cryptography": 2,
+              "MPC": 1
+            }
+          }
+        ]
+      },
+      {
+        "question": "How frequently is data transformed?",
+        "answers": [
+          {
+            "text": "One-time at ingestion",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 2,
+              "Cryptography": 6,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "Per-access or per-query noise",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 8,
+              "Cryptography": 5,
+              "MPC": 7
+            }
+          }
+        ]
+      },
+      {
+        "question": "How is raw-data access handled?",
+        "answers": [
+          {
+            "text": "Block raw-data reads entirely",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 1,
+              "Cryptography": 8,
+              "MPC": 5
+            }
+          },
+          {
+            "text": "Allow access but inject noise each time",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 9,
+              "Cryptography": 2,
+              "MPC": 3
+            }
+          }
+        ]
+      },
+      {
+        "question": "Which capability does your team already manage?",
+        "answers": [
+          {
+            "text": "Encryption key management ready",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 3,
+              "Cryptography": 8,
+              "MPC": 5
+            }
+          },
+          {
+            "text": "DP noise-budget tracking ready",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 8,
+              "Cryptography": 3,
+              "MPC": 4
+            }
+          },
+          {
+            "text": "Neither capability established",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 1,
+              "Cryptography": 1,
+              "MPC": 1
+            }
+          }
+        ]
+      },
+      {
+        "question": "What level of audit logging is required?",
+        "answers": [
+          {
+            "text": "Full, record-level audit logs",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 1,
+              "Cryptography": 8,
+              "MPC": 6
+            }
+          },
+          {
+            "text": "Only summary-level reports",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 6,
+              "Cryptography": 3,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "No formal logging requirement",
+            "weights": {
+              "Anonymization": 8,
+              "Differential Privacy": 4,
+              "Cryptography": 2,
+              "MPC": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Communicate",
+    "goal": "Determine who needs to be informed about privacy measures and how much technical detail to share.",
+    "insights": [
+      "Publish clear, jargon-free notices so everyone knows what you do with data.",
+      "Provide easy feedback channels (dashboards, surveys) so users and partners can ask questions.",
+      "Maintain simple records of data disclosures and corrections—summaries often suffice.",
+      "Notify affected parties quickly if anything goes wrong and explain how you’ll fix it."
+    ],
+    "questions": [
+      {
+        "question": "Who is the primary audience for your privacy reports?",
+        "answers": [
+          {
+            "text": "Internal staff",
+            "weights": {
+              "Anonymization": 3,
+              "Differential Privacy": 6,
+              "Cryptography": 7,
+              "MPC": 5
+            }
+          },
+          {
+            "text": "External regulators/customers",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 5,
+              "Cryptography": 2,
+              "MPC": 1
+            }
+          }
+        ]
+      },
+      {
+        "question": "What level of technical detail must be disclosed?",
+        "answers": [
+          {
+            "text": "Exact technical specs (ε-values, cipher suites)",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 7,
+              "Cryptography": 8,
+              "MPC": 6
+            }
+          },
+          {
+            "text": "High-level summary only",
+            "weights": {
+              "Anonymization": 8,
+              "Differential Privacy": 5,
+              "Cryptography": 2,
+              "MPC": 1
+            }
+          }
+        ]
+      },
+      {
+        "question": "Must end-users be notified about the privacy transforms applied?",
+        "answers": [
+          {
+            "text": "Yes – notify users (opt-in/out, dashboards)",
+            "weights": {
+              "Anonymization": 5,
+              "Differential Privacy": 7,
+              "Cryptography": 2,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "No – internal only",
+            "weights": {
+              "Anonymization": 3,
+              "Differential Privacy": 2,
+              "Cryptography": 8,
+              "MPC": 6
+            }
+          }
+        ]
+      },
+      {
+        "question": "How often do you need to publish compliance reports?",
+        "answers": [
+          {
+            "text": "Real-time or near-real-time dashboards",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 8,
+              "Cryptography": 7,
+              "MPC": 4
+            }
+          },
+          {
+            "text": "Quarterly/Annual summaries",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 4,
+              "Cryptography": 6,
+              "MPC": 3
+            }
+          }
+        ]
+      },
+      {
+        "question": "Do you require mechanisms for stakeholder feedback on privacy controls?",
+        "answers": [
+          {
+            "text": "Yes – feedback loops needed",
+            "weights": {
+              "Anonymization": 6,
+              "Differential Privacy": 6,
+              "Cryptography": 3,
+              "MPC": 4
+            }
+          },
+          {
+            "text": "No – one-way reporting",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 3,
+              "Cryptography": 7,
+              "MPC": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Protect",
+    "goal": "Pinpoint the technical threat models and performance constraints that determine which privacy technologies meet your security and usability needs.",
+    "insights": [
+      "Choose encryption or shielding methods that block real attackers from stealing data.",
+      "Require strong authentication so only the right users and services get access.",
+      "Keep infrastructure patched, backed up, and resilient to failures or attacks.",
+      "Match each technology (DP, crypto, MPC) to your real-world threats and latency needs."
+    ],
+    "questions": [
+      {
+        "question": "What is your primary privacy threat model?",
+        "answers": [
+          {
+            "text": "Data theft/exfiltration (e.g. hacks)",
+            "weights": {
+              "Anonymization": 1,
+              "Differential Privacy": 1,
+              "Cryptography": 9,
+              "MPC": 6
+            }
+          },
+          {
+            "text": "Inference/re-identification from outputs",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 9,
+              "Cryptography": 1,
+              "MPC": 3
+            }
+          }
+        ]
+      },
+      {
+        "question": "How critical is exact, bit-perfect output?",
+        "answers": [
+          {
+            "text": "Exact, bit-for-bit correct outputs required",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 1,
+              "Cryptography": 9,
+              "MPC": 8
+            }
+          },
+          {
+            "text": "Approximate/noisy outputs acceptable",
+            "weights": {
+              "Anonymization": 5,
+              "Differential Privacy": 9,
+              "Cryptography": 1,
+              "MPC": 4
+            }
+          }
+        ]
+      },
+      {
+        "question": "What are your performance (latency) requirements?",
+        "answers": [
+          {
+            "text": "Sub-100 ms (real-time)",
+            "weights": {
+              "Anonymization": 7,
+              "Differential Privacy": 3,
+              "Cryptography": 9,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "Batch OK (minutes/hours allowed)",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 8,
+              "Cryptography": 3,
+              "MPC": 7
+            }
+          }
+        ]
+      },
+      {
+        "question": "At what scope must data be protected?",
+        "answers": [
+          {
+            "text": "Only in-transit and at-rest",
+            "weights": {
+              "Anonymization": 3,
+              "Differential Privacy": 1,
+              "Cryptography": 9,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "Also needs protection during analytics/training",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 8,
+              "Cryptography": 2,
+              "MPC": 9
+            }
+          }
+        ]
+      },
+      {
+        "question": "What is your trust model for raw data?",
+        "answers": [
+          {
+            "text": "Single trusted curator (centralized keys)",
+            "weights": {
+              "Anonymization": 4,
+              "Differential Privacy": 2,
+              "Cryptography": 8,
+              "MPC": 4
+            }
+          },
+          {
+            "text": "No one party may see raw data (fully trustless)",
+            "weights": {
+              "Anonymization": 2,
+              "Differential Privacy": 7,
+              "Cryptography": 1,
+              "MPC": 9
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
