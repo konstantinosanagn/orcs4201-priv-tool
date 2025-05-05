@@ -1,0 +1,61 @@
+{
+    "category": "Differential Privacy",
+    "dpSpecs": {
+      "CentralDP": {
+        "name": "Central Differential Privacy",
+        "summary": "Trust a central curator to collect raw data and add noise before release. Ideal for complex analytics or ML training and both one-time and interactive querying when you can tolerate slight inaccuracy.",
+        "criteria": [
+          "Access to raw user data on a secure server",
+          "Server/curator is trusted to see un-privatized inputs",
+          "Complex analysis or model training required",
+          "Multiple interactive queries or one-time release",
+          "Acceptable to release slightly noisy statistics"
+        ]
+      },
+      "LocalDP": {
+        "name": "Local Differential Privacy",
+        "summary": "Privatize each record on the user’s device before sending. Use when the curator is untrusted and you only need basic aggregates or one-time reports with higher noise tolerance.",
+        "criteria": [
+          "Data must be protected before leaving the user’s device",
+          "Curator is not trusted with raw inputs",
+          "Basic aggregates (histograms, counts) suffice",
+          "Typically one-time release rather than ongoing queries",
+          "High noise tolerance acceptable"
+        ]
+      },
+      "RandomizedResponse": {
+        "name": "Randomized Response",
+        "summary": "A special case of Local DP that flips each response with known probability. Best for extreme privacy on simple count queries when you cannot trust the server at all.",
+        "criteria": [
+          "On-device privatization via randomized flipping",
+          "Curator has zero trust in individual responses",
+          "Only simple aggregate queries needed",
+          "One-time report scenarios",
+          "Maximal privacy at cost of higher error"
+        ]
+      },
+      "UserLevelDP": {
+        "name": "User-Level Differential Privacy",
+        "summary": "Protect each user’s entire contribution set by treating people—not rows—as the unit of privacy. Necessary when users generate many records and you need holistic privacy for complex or interactive analyses.",
+        "criteria": [
+          "Users may contribute multiple data points (e.g., browsing history)",
+          "Curator is trusted to aggregate at the user level",
+          "Complex analysis or ML training on user behavior",
+          "Multiple interactive queries over time",
+          "Protect against identifying whether a user participated at all"
+        ]
+      },
+      "EventLevelDP": {
+        "name": "Event-Level Differential Privacy",
+        "summary": "Protect each individual event (row) independently, without linking back to users. Use when per-row privacy is enough and exact user linkage isn’t needed.",
+        "criteria": [
+          "Each user contributes only one or a few events",
+          "Per-row privacy guarantees suffice",
+          "Suitable for both one-time and interactive queries",
+          "Trusted curator can still manage accounting",
+          "Allow some linkage of user behavior across events"
+        ]
+      }
+    }
+  }
+  

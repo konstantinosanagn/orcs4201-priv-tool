@@ -22,3 +22,4 @@ document.addEventListener('DOMContentLoaded', () => {
       else slider.style.width = 0;
     });
 });
+

@@ -1,4 +1,4 @@
-/* static/css/protect_questions.css */
+/* static/css/identify_questions.css */
 
 /* ──────────────────────────────────────────────────────────── */
 /*  A) “Kill” the outer wrapper so it’s invisible / full width */
@@ -18,8 +18,10 @@
   min-height: 60vh;    /* or whatever keeps it visually centered */
 }
 
+
 /* Re-use much of your center-box styling, but override width & text-align */
 .question-box {
+  /* you can inherit from .center-box or simply duplicate its BG, shadows, etc. */
   background:
     radial-gradient(circle at 25% 20%, rgba(255,255,255,0.20) 0%, transparent 70%),
     radial-gradient(circle at 75% 80%, rgba(255,255,255,0.12) 0%, transparent 60%),
@@ -70,16 +72,18 @@
   border-color: rgba(0,123,255,0.8);
 }
 
+
+/* ────────────────────────────────────────────────────────── */
 /* Dark “Back” button, pill style, bottom-left */
 .back-btn {
   position: absolute;
   bottom: 1.5rem;
   left: 1.5rem;
   z-index: 1;
-  overflow: hidden;
+  overflow: hidden;             /* clip the shine */
   background: linear-gradient(
     45deg,
-    #111,
+    #111,  /* almost black */
     #222,
     #333,
     #222,
@@ -119,13 +123,16 @@
   animation: shine 1.2s ease-in-out 0s 1 forwards;
 }
 
-/* Metallic “Next” button */
+
+/* ────────────────────────────────────────────────────────── */
+/* Metallic “Next” button — exactly like your insights-toggle */
 .next-btn {
   position: absolute;
   bottom: 1.5rem;
   right: 1.5rem;
   z-index: 1;
-  overflow: hidden;
+  overflow: hidden;      /* clip the shine inside the pill */
+
   background: linear-gradient(
     45deg,
     #999 5%,
@@ -136,6 +143,7 @@
     #fff 80%,
     #999 95%
   ) !important;
+
   color: rgb(58, 58, 58) !important;
   text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
   border: none !important;
@@ -143,12 +151,14 @@
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
   padding: 6px 16px !important;
   transition: all 0.2s ease-in-out;
+
   font-family: 'Manrope', Arial, sans-serif !important;
   font-size: 1.125rem !important;
   font-weight: bold !important;
   letter-spacing: 0.5px;
   cursor: pointer;
 }
+
 .next-btn::after {
   content: "";
   position: absolute;
@@ -166,94 +176,138 @@
   transform: translateX(100%) rotate(45deg);
   z-index: 2;
 }
+
 .next-btn:hover::after {
   animation: shine 1.2s ease-in-out 0s 1 forwards;
 }
 
-/* Info button */
+
 .info-btn {
+   
   position: absolute !important;
   bottom: 1.5rem !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
+
+  /* make it a bigger circle */
   width: 2.5rem !important;
   height: 2.5rem !important;
   padding: 0 !important;
   border-radius: 50% !important;
+
+  /* larger icon */
   font-size: 1.5rem !important;
   line-height: 1 !important;
+
+  /* white icon, no link decorations */
   color: #fff !important;
   background: transparent !important;
   border: none !important;
   text-decoration: none !important;
 }
+
 .info-btn:hover {
+  /* optional hover feedback */
   background: rgba(255,255,255,0.1) !important;
+  text-decoration: none !important;
 }
 
-/* match the overall‐cell look for the slide-in panel */
+.info-btn,
+.info-btn:hover,
+.info-btn:focus,
+.info-btn:active {
+text-decoration: none !important;
+outline: none !important;
+box-shadow: none !important;
+}
+
+/* match the overall‐cell look */
 .info-container {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background:
-    radial-gradient(circle at 25% 20%, rgba(0,0,0,0.30) 0%, transparent 70%),
-    radial-gradient(circle at 75% 80%, rgba(0,0,0,0.20) 0%, transparent 60%),
-    radial-gradient(circle at 50% 50%, rgba(0,0,0,0.10) 0%, transparent 50%),
-    rgba(10,10,20,0.85);
-  backdrop-filter: blur(12px) saturate(200%);
-  -webkit-backdrop-filter: blur(12px) saturate(200%);
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 8px 48px rgba(0,0,0,0.8);
-  transform: translateX(100%);
-  transition: transform 0.3s ease, padding 0.3s ease;
-  padding: 0;
-  overflow-y: auto;
-  z-index: 10;
+position: absolute;
+top: 0; left: 0;
+width: 100%;
+height: 100%;
+/* —— overall‐cell gradient + glass: —— */
+background:
+  radial-gradient(circle at 25% 20%, rgba(0,0,0,0.30) 0%, transparent 70%),
+  radial-gradient(circle at 75% 80%, rgba(0,0,0,0.20) 0%, transparent 60%),
+  radial-gradient(circle at 50% 50%, rgba(0,0,0,0.10) 0%, transparent 50%),
+  rgba(10,10,20,0.85);
+backdrop-filter: blur(12px) saturate(200%);
+-webkit-backdrop-filter: blur(12px) saturate(200%);
+border: 1px solid rgba(255,255,255,0.08);
+box-shadow: 0 8px 48px rgba(0,0,0,0.8);
+
+transform: translateX(100%);
+transition: transform 0.3s ease, padding 0.3s ease;
+padding: 0;                /* only add inside padding when open */
+overflow-y: auto;
+z-index: 10;
 }
 
 /* slide in */
 .question-box.open .info-container {
-  transform: translateX(0);
-  padding: 1rem;
+transform: translateX(0);
+padding: 1rem;
 }
 
-/* scrollable text body */
+/* wrap your text so it scrolls nicely inside */
 .info-body {
-  max-height: 100%;
-  overflow-y: auto;
+max-height: 100%;
+overflow-y: auto;
 }
 
-/* close button */
+/* little “×” close button top-right */
 .info-container .close-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  line-height: 1;
-  color: #fff;
-  cursor: pointer;
-  padding: 0.25rem;
-  transition: color 0.2s ease;
+position: absolute;
+top: 0.5rem;
+right: 0.5rem;
+background: transparent;
+border: none;
+font-size: 1.5rem;
+line-height: 1;
+color: #fff;
+cursor: pointer;
+padding: 0.25rem;
+transition: color 0.2s ease;
 }
 .info-container .close-btn:hover {
-  color: #ddd;
+color: #ddd;
 }
 
-/* breathing room & bigger text */
+/* give the info‐body some breathing room, and bump up type size */
 .info-container .info-body {
-  padding: 1.5rem;
-  font-size: 1.5rem;
-  line-height: 1.6;
+padding: 1.5rem;        /* space around the text */
+font-size: 1.5rem;        /* bump from 0.9rem to a full 1rem */
+line-height: 1.6;       /* a bit more leading for readability */
 }
 
-/* larger headings */
+/* if you want headings even larger: */
 .info-container .info-body h1,
 .info-container .info-body h2,
 .info-container .info-body h3 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+margin-top: 0;
+margin-bottom: 0.5rem;
+}
+
+/* 1) make the center-box an invisible full-screen wrapper */
+.center-box {
+position: absolute !important;
+inset: 0 !important;           /* top:0;right:0;bottom:0;left:0 */
+background: transparent !important;
+border: none              !important;
+box-shadow: none          !important;
+padding: 0                !important;
+z-index: 0          /* sits above the gradient-background (z-index:0) and below nav (1000) */
+}
+
+/* 2) have the questions-container fill that wrapper and center its kids */
+#questions-container {
+position: absolute;     /* fill the whole wrapper */
+inset: 0;               /* shorthand for top:0; right:0; bottom:0; left:0 */
+display: flex;
+align-items: center;    /* vertical centering */
+justify-content: center;/* horizontal centering */
+overflow: auto;         /* scroll if content is ever taller than the screen */
+z-index: 1;             /* on top of the wrapper, below nav */
 }

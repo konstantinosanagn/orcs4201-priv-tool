@@ -138,3 +138,82 @@ html, body {
     font-weight: bold;
   }
   
+
+  /* 0) Gray canvas behind everything */
+.fullscreen-bg::before {
+  background: #555;            /* nice mid-gray */
+  filter: none;                /* turn off your old blur/brightness */
+}
+
+/* 1) Wrap the animated pieces */
+.gradient-background {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* 2) Blurry, floating spheres */
+.gradient-sphere {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+.sphere-1 {
+  width: 40vw; height: 40vw;
+  background: linear-gradient(40deg,
+    rgba(0,31,63,0.8),
+    rgba(0,95,153,0.4)
+  );
+  top: -10%; left: -10%;
+  animation: float-1 15s ease-in-out infinite alternate;
+}
+.sphere-2 {
+  width: 45vw; height: 45vw;
+  background: linear-gradient(220deg,
+    rgba(0,128,80,0.8),
+    rgba(102,255,153,0.4)
+  );
+  bottom: -20%; right: -10%;
+  animation: float-2 18s ease-in-out infinite alternate;
+}
+
+/* 3) Soft glowing center */
+.glow {
+  position: absolute;
+  width: 40vw; height: 40vh;
+  background: radial-gradient(circle,
+    rgba(0,128,80,0.15),
+    transparent 70%
+  );
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 2;
+  animation: pulse 8s infinite alternate;
+  filter: blur(30px);
+}
+
+/* 4) Very subtle noise for texture */
+.noise-overlay {
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  opacity: 0.05;
+  z-index: 3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* 5) Floating keyframes */
+@keyframes float-1 {
+  0% { transform: translate(0,0) scale(1); }
+  100% { transform: translate(10%,10%) scale(1.1); }
+}
+@keyframes float-2 {
+  0% { transform: translate(0,0) scale(1); }
+  100% { transform: translate(-10%,-5%) scale(1.15); }
+}
+@keyframes pulse {
+  0% { opacity:0.3; transform: translate(-50%,-50%) scale(0.9); }
+ 100% { opacity:0.7; transform: translate(-50%,-50%) scale(1.1); }
+}

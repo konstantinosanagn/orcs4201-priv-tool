@@ -135,16 +135,9 @@
   .pill-marquee {
     display: flex;
     flex-direction: column;
-    animation-name: scroll-up;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
   }
   
-  @keyframes scroll-up {
-    0%   { transform: translateY(0); }
-    100% { transform: translateY(-50%); }
-  }
-  
+
 /* ensure the icon box stays square */
 .pill-icon {
     flex: 0 0 1.2em;        /* fixed width/height */

@@ -289,3 +289,41 @@
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
+
+/* 1) make the center-box an invisible full-screen wrapper */
+.center-box {
+  position: absolute !important;
+  inset: 0 !important;           /* top:0;right:0;bottom:0;left:0 */
+  background: transparent !important;
+  border: none              !important;
+  box-shadow: none          !important;
+  padding: 0                !important;
+  z-index: 0          /* sits above the gradient-background (z-index:0) and below nav (1000) */
+}
+
+/* 2) have the questions-container fill that wrapper and center its kids */
+#questions-container {
+  position: absolute;     /* fill the whole wrapper */
+  inset: 0;               /* shorthand for top:0; right:0; bottom:0; left:0 */
+  display: flex;
+  align-items: center;    /* vertical centering */
+  justify-content: center;/* horizontal centering */
+  overflow: auto;         /* scroll if content is ever taller than the screen */
+  z-index: 1;             /* on top of the wrapper, below nav */
+}
+
+/* 1) Remove the .center-box wrapper so it no longer affects layout */
+.center-box {
+  display: contents !important;
+}
+
+/* 2) Pin your #questions-container to the viewport and center its children */
+#questions-container {
+  position: fixed;    /* stick to the screen, not inside any parent */
+  inset: 0;           /* shorthand for top:0; right:0; bottom:0; left:0 */
+  display: flex;
+  align-items: center;      /* vertical centering */
+  justify-content: center;  /* horizontal centering */
+  overflow: auto;           /* just in case question-box is bigger than the screen */
+  z-index: 10;              /* above your background but below nav (which is 1000) */
+}

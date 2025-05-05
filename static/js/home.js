@@ -41,19 +41,31 @@ document.addEventListener("DOMContentLoaded", () => {
   
     typeLoop();
   
-    // --- Smooth marquee for info panel ---
     const marquee = document.querySelector('.pill-marquee');
     if (marquee) {
-      // 1) Duplicate content so it loops seamlessly
-      marquee.innerHTML += marquee.innerHTML;
+      // 1) measure *before* we duplicate
+      const groupHeight = marquee.scrollHeight;
   
-      // 2) Compute duration based on content height and desired speed
-      const scrollSpeed = 30; // pixels per second
-      const singleHeight = marquee.scrollHeight / 2;
-      const duration     = singleHeight / scrollSpeed;
+      // 2) clone only the FIRST batch so we get exactly two identical groups
+      const originalHTML = marquee.innerHTML;
+      marquee.innerHTML += originalHTML;
   
-      // 3) Apply the CSS animation
-      marquee.style.animation = `scroll-up ${duration}s linear infinite`;
+      // 3) compute duration in ms
+      const scrollSpeed = 30;  // pixels per second
+      const durationMs  = (groupHeight / scrollSpeed) * 1000;
+  
+      // 4) launch infinitely‐looping, perfectly smooth scroll
+      marquee.animate(
+        [
+          { transform: 'translateY(0)' },
+          { transform: `translateY(-${groupHeight}px)` }
+        ],
+        {
+          duration:    durationMs,
+          iterations:  Infinity,
+          easing:      'linear'
+        }
+      );
     }
   });
 

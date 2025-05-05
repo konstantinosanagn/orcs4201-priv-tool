@@ -12,6 +12,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
+    cursor: pointer;
   }
   
   .ranking-item,
@@ -24,6 +25,7 @@
   .ranking-item {
     flex: 1;
     padding-right: 0.5rem;
+    padding: 5px;
   }
   
   .ranking-points {
@@ -32,3 +34,27 @@
     white-space: nowrap;
   }
   
+/* Only apply 3D context to the overall ranking list */
+#cell-overall .ranking-list {
+  perspective: 800px;
+}
+
+/* Make the overall items invisible but keep 3D & hover behavior */
+#cell-overall .ranking-list li {
+  /* remove all background / border styling */
+  background: transparent;
+  border: none;
+  
+  /* preserve 3D transform capability */
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Pop-out on hover */
+#cell-overall .ranking-list li:hover {
+  transform: translateZ(20px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  padding-right: 10px;
+}

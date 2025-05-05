@@ -1,160 +1,174 @@
 [
-    {
-      "category": "Cryptography Tool Selection",
-      "goal": "Identify the best cryptographic approach based on security requirements, performance, and trust model.",
-      "insights": [
-        "Symmetric encryption offers high-performance confidentiality but relies on secure key distribution.",
-        "Asymmetric encryption simplifies key management at the cost of higher computational overhead.",
-        "Digital signature schemes guarantee integrity and non-repudiation, essential for authentication and legal compliance.",
-        "The ideal choice depends on message size, latency constraints, key distribution infrastructure, and trust assumptions."
-      ],
-      "questions": [
-        {
-          "question": "Which security property is most critical?",
-          "answers": [
-            {
-              "text": "Confidentiality of large datasets",
-              "weights": {
-                "SymmetricEncryption": 8,
-                "AsymmetricEncryption": 5,
-                "DigitalSignature": 1
-              }
-            },
-            {
-              "text": "Message integrity and authentication",
-              "weights": {
-                "SymmetricEncryption": 4,
-                "AsymmetricEncryption": 6,
-                "DigitalSignature": 8
-              }
-            },
-            {
-              "text": "Non-repudiation and legal compliance",
-              "weights": {
-                "SymmetricEncryption": 1,
-                "AsymmetricEncryption": 3,
-                "DigitalSignature": 9
-              }
+  {
+    "category": "Cryptography Tool Selection",
+    "goal": "Identify the best cryptographic approach based on security requirements, performance, and trust model.",
+    "insights": [
+      "Symmetric (private-key) encryption offers high-performance confidentiality but relies on secure key distribution.",
+      "Asymmetric (public-key) encryption simplifies key management at the cost of higher computational overhead.",
+      "Digital signature schemes guarantee integrity and non-repudiation, essential for authentication and legal compliance.",
+      "Multi-Party Computation (MPC) enables joint computation on private inputs without revealing them, ideal for distributed trust scenarios."
+    ],
+    "questions": [
+      {
+        "question": "Which security property is most critical?",
+        "answers": [
+          {
+            "text": "Confidentiality of large datasets",
+            "weights": {
+              "PrivateKeyEncryption": 9,
+              "PublicKeyEncryption": 5,
+              "DigitalSignature": 1,
+              "MPC": 4
             }
-          ]
-        },
-        {
-          "question": "What is your key distribution model?",
-          "answers": [
-            {
-              "text": "Pre-shared secret keys between participants",
-              "weights": {
-                "SymmetricEncryption": 9,
-                "AsymmetricEncryption": 2,
-                "DigitalSignature": 1
-              }
-            },
-            {
-              "text": "Public-Key Infrastructure (PKI) available",
-              "weights": {
-                "SymmetricEncryption": 2,
-                "AsymmetricEncryption": 9,
-                "DigitalSignature": 8
-              }
-            },
-            {
-              "text": "Manual exchange of public keys without PKI",
-              "weights": {
-                "SymmetricEncryption": 3,
-                "AsymmetricEncryption": 7,
-                "DigitalSignature": 7
-              }
+          },
+          {
+            "text": "Message integrity and authentication",
+            "weights": {
+              "PrivateKeyEncryption": 4,
+              "PublicKeyEncryption": 6,
+              "DigitalSignature": 9,
+              "MPC": 5
             }
-          ]
-        },
-        {
-          "question": "What are your performance and resource constraints?",
-          "answers": [
-            {
-              "text": "High throughput, low latency required",
-              "weights": {
-                "SymmetricEncryption": 9,
-                "AsymmetricEncryption": 3,
-                "DigitalSignature": 4
-              }
-            },
-            {
-              "text": "CPU-constrained or embedded environment",
-              "weights": {
-                "SymmetricEncryption": 8,
-                "AsymmetricEncryption": 4,
-                "DigitalSignature": 3
-              }
-            },
-            {
-              "text": "Infrequent operations where speed is less critical",
-              "weights": {
-                "SymmetricEncryption": 2,
-                "AsymmetricEncryption": 8,
-                "DigitalSignature": 7
-              }
+          },
+          {
+            "text": "Non-repudiation and legal compliance",
+            "weights": {
+              "PrivateKeyEncryption": 1,
+              "PublicKeyEncryption": 3,
+              "DigitalSignature": 9,
+              "MPC": 2
             }
-          ]
-        },
-        {
-          "question": "What is the typical size of the data or messages?",
-          "answers": [
-            {
-              "text": "Large bulk data transfers",
-              "weights": {
-                "SymmetricEncryption": 9,
-                "AsymmetricEncryption": 2,
-                "DigitalSignature": 1
-              }
-            },
-            {
-              "text": "Small packets or key exchanges",
-              "weights": {
-                "SymmetricEncryption": 3,
-                "AsymmetricEncryption": 8,
-                "DigitalSignature": 5
-              }
-            },
-            {
-              "text": "Frequent signing of small messages",
-              "weights": {
-                "SymmetricEncryption": 1,
-                "AsymmetricEncryption": 4,
-                "DigitalSignature": 9
-              }
+          }
+        ]
+      },
+      {
+        "question": "What is your key distribution model?",
+        "answers": [
+          {
+            "text": "Pre-shared secret keys between participants",
+            "weights": {
+              "PrivateKeyEncryption": 9,
+              "PublicKeyEncryption": 2,
+              "DigitalSignature": 1,
+              "MPC": 7
             }
-          ]
-        },
-        {
-          "question": "What trust model governs your key management?",
-          "answers": [
-            {
-              "text": "Single trusted authority manages all keys",
-              "weights": {
-                "SymmetricEncryption": 7,
-                "AsymmetricEncryption": 8,
-                "DigitalSignature": 5
-              }
-            },
-            {
-              "text": "No single trusted party; distributed trust",
-              "weights": {
-                "SymmetricEncryption": 2,
-                "AsymmetricEncryption": 5,
-                "DigitalSignature": 8
-              }
-            },
-            {
-              "text": "Public verifiability for third parties",
-              "weights": {
-                "SymmetricEncryption": 1,
-                "AsymmetricEncryption": 3,
-                "DigitalSignature": 9
-              }
+          },
+          {
+            "text": "Public-Key Infrastructure (PKI) available",
+            "weights": {
+              "PrivateKeyEncryption": 2,
+              "PublicKeyEncryption": 9,
+              "DigitalSignature": 8,
+              "MPC": 4
             }
-          ]
-        }
-      ]
-    }
-  ]
-  
+          },
+          {
+            "text": "Manual exchange of public keys without PKI",
+            "weights": {
+              "PrivateKeyEncryption": 3,
+              "PublicKeyEncryption": 7,
+              "DigitalSignature": 7,
+              "MPC": 3
+            }
+          }
+        ]
+      },
+      {
+        "question": "What are your performance and resource constraints?",
+        "answers": [
+          {
+            "text": "High throughput, low latency required",
+            "weights": {
+              "PrivateKeyEncryption": 9,
+              "PublicKeyEncryption": 3,
+              "DigitalSignature": 5,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "CPU-constrained or embedded environment",
+            "weights": {
+              "PrivateKeyEncryption": 8,
+              "PublicKeyEncryption": 4,
+              "DigitalSignature": 3,
+              "MPC": 1
+            }
+          },
+          {
+            "text": "Infrequent operations where speed is less critical",
+            "weights": {
+              "PrivateKeyEncryption": 2,
+              "PublicKeyEncryption": 8,
+              "DigitalSignature": 7,
+              "MPC": 6
+            }
+          }
+        ]
+      },
+      {
+        "question": "What is the typical size of the data or messages?",
+        "answers": [
+          {
+            "text": "Large bulk data transfers",
+            "weights": {
+              "PrivateKeyEncryption": 9,
+              "PublicKeyEncryption": 2,
+              "DigitalSignature": 1,
+              "MPC": 2
+            }
+          },
+          {
+            "text": "Small packets or key exchanges",
+            "weights": {
+              "PrivateKeyEncryption": 4,
+              "PublicKeyEncryption": 8,
+              "DigitalSignature": 5,
+              "MPC": 5
+            }
+          },
+          {
+            "text": "Frequent signing of small messages",
+            "weights": {
+              "PrivateKeyEncryption": 1,
+              "PublicKeyEncryption": 4,
+              "DigitalSignature": 9,
+              "MPC": 3
+            }
+          }
+        ]
+      },
+      {
+        "question": "What trust model governs your key management?",
+        "answers": [
+          {
+            "text": "Single trusted authority manages all keys",
+            "weights": {
+              "PrivateKeyEncryption": 8,
+              "PublicKeyEncryption": 7,
+              "DigitalSignature": 5,
+              "MPC": 3
+            }
+          },
+          {
+            "text": "No single trusted party; distributed trust",
+            "weights": {
+              "PrivateKeyEncryption": 2,
+              "PublicKeyEncryption": 5,
+              "DigitalSignature": 8,
+              "MPC": 9
+            }
+          },
+          {
+            "text": "Public verifiability for third parties",
+            "weights": {
+              "PrivateKeyEncryption": 1,
+              "PublicKeyEncryption": 3,
+              "DigitalSignature": 9,
+              "MPC": 4
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

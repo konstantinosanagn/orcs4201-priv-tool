@@ -1,0 +1,62 @@
+{
+    "category": "Cryptography Tool Selection",
+    "cryptoSpecs": {
+      "PrivateKeyEncryption": {
+        "name": "Private-Key (Symmetric) Encryption",
+        "summary": "Fast, low-latency encryption using a shared secret key. Best for high-throughput bulk data protection when you can securely distribute and store the secret key.",
+        "criteria": [
+          "Pre-shared secret key among all participants",
+          "Real-time or sub-100 ms latency requirements",
+          "Large bulk data transfers",
+          "Single trusted authority for key distribution",
+          "Enforce at ingestion or on-device before transmission",
+          "Block raw-data reads entirely",
+          "Full record-level audit logs",
+          "Required by regulation (e.g., HIPAA, GDPR) for data-at-rest/in-transit"
+        ]
+      },
+      "PublicKeyEncryption": {
+        "name": "Public-Key (Asymmetric) Encryption",
+        "summary": "Encryption with separate public/private key pairs. Ideal for small payloads or infrequent operations when you have a PKI or need manual public-key exchange, and can tolerate higher computational cost.",
+        "criteria": [
+          "Public-Key Infrastructure (PKI) or manual public-key exchange",
+          "Small messages or key-exchange operations",
+          "Infrequent encryption where latency is less critical",
+          "Cross-system or cross-dataset joins under distributed trust",
+          "Enforce at ingestion or per-query transformation",
+          "Summary-level audit logs acceptable",
+          "CPU-constrained environments with intermittent use",
+          "Recognized by policies requiring public-key methods"
+        ]
+      },
+      "DigitalSignature": {
+        "name": "Digital Signatures",
+        "summary": "Signing scheme that provides message integrity, authentication, and non-repudiation. Essential for legal compliance, public verifiability, and detailed audit trails, especially when signing many small messages.",
+        "criteria": [
+          "Non-repudiation and legal compliance",
+          "Frequent signing of small messages",
+          "Message integrity and authentication",
+          "Public verifiability via PKI or manual key distribution",
+          "Distributed trust with no single key authority",
+          "Full record-level audit logs",
+          "Acceptable occasional signing performance",
+          "Technical spec disclosure for compliance reporting"
+        ]
+      },
+      "MPC": {
+        "name": "Secure Multi-Party Computation (MPC)",
+        "summary": "Protocols enabling multiple parties to jointly compute functions over their private inputs without revealing them. Suited for fully trustless analytics or training when no one party should see raw data.",
+        "criteria": [
+          "No single party may see raw data (fully trustless model)",
+          "Protection required during analytics or ML training",
+          "Complex, multi-party computations over sensitive inputs",
+          "Batch or one-time operations where higher latency is acceptable",
+          "Enforce per-query or at analytics stage",
+          "Summary-level audit logs",
+          "High computational overhead tolerated",
+          "Useful when distributing trust across organizations"
+        ]
+      }
+    }
+  }
+  
